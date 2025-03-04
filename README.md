@@ -68,7 +68,7 @@ El sistema debe permitir al usuario crear un contacto.
 
 | Tipo | Nombre | Teléfono | Error           |
 |------|--------|----------|----------|
-| "" | "Felipe Sánchez" | "" | Error! Campo vacío|
+| "" | "Felipe Sánchez" | "313 812 149916" | Error! Campo vacío|
 
 
 
