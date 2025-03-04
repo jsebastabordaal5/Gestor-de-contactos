@@ -7,6 +7,9 @@ El objetivo de este proyecto es desarrollar una aplicación para la gestión de 
 # 1. Crear un contacto:
 El sistema debe permitir al usuario crear un contacto.
 
+## Caso de prueba 1: Caso normal:
+| Tipo | Nombre | Teléfono |
+
 
 # 2. Editar un contacto:
 El sistema debe permitir al usuario editar la información de un
