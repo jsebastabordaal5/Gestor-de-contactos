@@ -55,16 +55,20 @@ El sistema debe permitir al usuario crear un contacto.
 
 
 
-## Caso de prueba 9: Nombre vacío:
+## Caso de prueba 9: Campos vacíos:
 | Tipo | Nombre | Teléfono | Error           |
 |------|--------|----------|----------|
 | "Profesional" | "" | "313 812 149916" | Error! Campo Vacío|
 
 
-## Caso de prueba 10: Teléfono vacío:
 | Tipo | Nombre | Teléfono | Error           |
 |------|--------|----------|----------|
 | "Profesional" | "Felipe Sánchez" | "" | Error! Campo vacío|
+
+
+| Tipo | Nombre | Teléfono | Error           |
+|------|--------|----------|----------|
+| "" | "Felipe Sánchez" | "" | Error! Campo vacío|
 
 
 
