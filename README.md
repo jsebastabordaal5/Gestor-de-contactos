@@ -48,6 +48,28 @@ El sistema debe permitir al usuario crear un contacto.
 
 
 
+## Caso de prueba 8: Datos NO numéricos:
+| Tipo | Nombre | Teléfono | Error           |
+|------|--------|----------|----------|
+| "Profesional" | "Juan Mecánico" | "313 812 149916" | Error! Contiene letras|
+
+
+
+## Caso de prueba 9: Nombre vacío:
+| Tipo | Nombre | Teléfono | Error           |
+|------|--------|----------|----------|
+| "Profesional" | "" | "313 812 149916" | Error! Contiene letras|
+
+
+## Caso de prueba 10: Teléfono vacío:
+| Tipo | Nombre | Teléfono | Error           |
+|------|--------|----------|----------|
+| "Profesional" | "Felipe Sánchez" | "" | Error! Contiene letras|
+
+
+
+
+
 
 
 
