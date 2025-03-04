@@ -42,7 +42,7 @@ El sistema debe permitir al usuario crear un contacto.
 
 
 ## Caso de prueba 7: Tipo de Contacto Inválido:
-| Tipo | Nombre | Teléfono | |           |
+| Tipo | Nombre | Teléfono | Error           |
 |------|--------|----------|----------|
 | "Parcero" | "Juan González" | "331 2498 3127" | Error! Tipo de contacto Inválido|
 
