@@ -9,6 +9,8 @@ El sistema debe permitir al usuario crear un contacto.
 
 ## Caso de prueba 1: Caso normal:
 | Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| Personal | Juan Sebastián | "3226130937" |
 
 
 # 2. Editar un contacto:
