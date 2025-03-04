@@ -10,7 +10,49 @@ El sistema debe permitir al usuario crear un contacto.
 ## Caso de prueba 1: Caso normal:
 | Tipo | Nombre | Teléfono |
 |------|--------|----------|
-| Personal | Juan Sebastián | "3226130937" |
+| "Personal" | "Juan Sebastián" | "3226130937" |
+
+## Caso de prueba 2: Caso normal:
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Profesional" | "Tomás Henao" | "3146272068" |
+
+## Caso de prueba 3: Caso normal:
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Profesional" | "Daniel Olarte" | "3148122216" |
+
+
+## Caso de prueba 4: Nombre con más de 12 caracteres:
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Profesional" | "Daniel Olarte Pérez Valencia Villa Andrade" | "3148122216" |
+
+
+## Caso de prueba 5: Teléfono con más de 10 dígitos:
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Samuel Flórez" | "99999999999999999" |
+
+
+## Caso de prueba 6: Nombre con un sólo caracter:
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Y" | "331 2498 3127" |
+
+
+## Caso de prueba 7: Tipo de Contacto Inválido:
+| Tipo | Nombre | Teléfono | |           |
+|------|--------|----------|
+| "Parcero" | "Juan González" | "331 2498 3127" | Error! Tipo de contacto Inválido|
+
+
+
+
+
+
+
+
 
 
 # 2. Editar un contacto:
