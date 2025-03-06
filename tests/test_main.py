@@ -3,7 +3,8 @@ from src.model.gestor_contactos import GestorContactos
 from src.model.contacto import Contacto
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
-    NombreVacioError, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError
+    CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalido
+
 
 
 import pytest
@@ -13,29 +14,50 @@ import pytest
 #Normales
 def test_crear_contacto_1():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("personal", "juan sebastian", "3226130937")
+    contacto= Contacto("personal", "juan sebastian", "3226130937")
+    usuario.gestor.registrar_contacto(contacto)
     assert len(usuario.gestor.contactos) == 1
 
 def test_crear_contacto_2():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("profesional", "tomas henao", "3146272068")
+    contacto = Contacto("profesional", "tomas henao", "3148122236")
+    usuario.gestor.registrar_contacto(contacto)
     assert len(usuario.gestor.contactos) == 1
 
 def test_crear_contacto_3():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("profesional", "daniel olarte", "3148122296")
+    contacto = Contacto("profesional", "daniel olarte", "3148122216")
+    usuario.gestor.registrar_contacto(contacto)
     assert len(usuario.gestor.contactos) == 1
 
 #Extremos
 def test_nombre_con_mas_de_15_caracteres():
     usuario = Usuario("juan", "12345")
-
-
     with pytest.raises(NombreLargoError):
-        usuario.gestor.registrar_contacto("profesional", "daniel olarte perez valencia villa", "3148122296")
+        contacto = Contacto("personal", "Daniel Olarte Pérez Valencia Villa Andrade", "3148122216")
 
 
 
+
+def test_telefono_mas_de_10_digitos():
+    usuario = Usuario("juan", "12345")
+
+    with pytest.raises(NumeroLargoError):
+        usuario.gestor.registrar_contacto("personal", "Samuel Florez", "99999999999999999")
+
+
+def test_nombre_con_solo_1_caracter():
+    usuario = Usuario("juan", "12345")
+
+    with pytest.raises(NombreDeUnCaracter):
+        usuario.gestor.registrar_contacto("personal", "y", "331 2498 3127")
+
+
+
+def test_tipo_contacto_invalido():
+    usuario = Usuario("juan", "12345")
+    with pytest.raises(TipoContactoInvalido):
+        usuario.gestor.registrar_contacto("parcero", "y", "331 2498 3127")
 
 
 

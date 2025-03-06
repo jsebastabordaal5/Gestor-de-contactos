@@ -8,6 +8,9 @@ class GestorContactos:
     def ver_contactos(self):
         pass
 
+    def registrar_contacto(self,contacto:Contacto):
+        pass
+
 
 
     def editar_contacto(self, nombre_actual:str, nuevo_tipo: str = None , nuevo_nombre : str= None , nuevo_telefono: str = None ):
