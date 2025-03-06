@@ -136,17 +136,37 @@ def test_editar_contacto_sin_valores():
         usuario.gestor.editar_contacto("samuel")  
 
 
-
-
 def test_editar_contacto_nombre_vacio():
     usuario = Usuario("juan", "12345")
     usuario.gestor.registrar_contacto("personal", "samuel", "300222398")
-
     with pytest.raises(CampoVacio):
         usuario.gestor.editar_contacto("samuel", nuevo_nombre= "")
+
+
+# Requisito 3
+
+# Normales
+
+def test_filtrar_contactos_por_nombre():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "Carlos Pérez", "555123456"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("personal", "Carlos Gómez", "555987654"),
+    ]
+    resultado = usuario.gestor.filtrar_contactos('nombre', 'carlos')
+
+    esperado = [
+        Contacto("personal", "Carlos Pérez", "555123456"),
+        Contacto("personal", "Carlos Gómez", "555987654")
+    ]
+    assert resultado == esperado
+
+
        
 
 #Requisito 4
+
 #Normales
 def test_exportar_contacto():
    usuario = Usuario("juan", "12345")
