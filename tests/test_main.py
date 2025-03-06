@@ -163,6 +163,38 @@ def test_filtrar_contactos_por_nombre():
     assert resultado == esperado
 
 
+def test_filtrar_contactos_por_telefono():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "Juan Rodríguez", "3146272068"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "309482213"),
+    ]
+    resultado = usuario.gestor.filtrar_contactos('telefono', '314')
+
+    esperado = [
+        Contacto("personal", "Juan Rodríguez", "3146272068")
+    ]
+    assert resultado == esperado
+
+
+
+def test_filtrar_contactos_por_tipo():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "Juan Rodríguez", "3146272068"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "309482213")
+    ]
+    resultado = usuario.gestor.filtrar_contactos('tipo', 'profesional')
+
+    esperado = [
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "309482213")
+    ]
+    assert resultado == esperado
+
+
 
 
        
