@@ -1,7 +1,52 @@
-from main import Usuario , GestorContactos , Contacto
-import pytest
-from errores import ContactoNoEncontradoError , DatosInsuficientesError, NumeroInvalidoError, NombreCortoError , NombreVacioError, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido
+from src.model.usuario import Usuario
+from src.model.gestor_contactos import GestorContactos
+from src.model.contacto import Contacto
 
+from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
+    NombreVacioError, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError
+
+
+import pytest
+
+#Requisito 1
+
+#Normales
+def test_crear_contacto_1():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_contacto("personal", "juan sebastian", "3226130937")
+    assert len(usuario.gestor.contactos) == 1
+
+def test_crear_contacto_2():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_contacto("profesional", "tomas henao", "3146272068")
+    assert len(usuario.gestor.contactos) == 1
+
+def test_crear_contacto_3():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_contacto("profesional", "daniel olarte", "3148122296")
+    assert len(usuario.gestor.contactos) == 1
+
+#Extremos
+def test_nombre_con_mas_de_15_caracteres():
+    usuario = Usuario("juan", "12345")
+
+
+    with pytest.raises(NombreLargoError):
+        usuario.gestor.registrar_contacto("profesional", "daniel olarte perez valencia villa", "3148122296")
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Requisito 2
 #Normales
 def test_editar_tipo_contacto ( ):
     usuario = Usuario("juan","12345")
@@ -78,7 +123,7 @@ def test_editar_contacto_nombre_vacio():
        
 
 #Requisito 4
-
+#Normales
 def test_exportar_contacto():
    usuario = Usuario("juan", "12345")
    usuario.gestor.registrar_contacto("personal", "samuel", "300222398")

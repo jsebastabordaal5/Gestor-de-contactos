@@ -14,6 +14,10 @@ class NombreVacioError(Exception):
     "se lanza cuando el campo de nuevo nombre es vacio"
     pass
 
+class NombreLargoError(Exception):
+    "Se lanza cuando el nombre supera los 15 caracteres"
+    pass
+
 class NombreCortoError(Exception):
     "se lanza cuando el campo de nuevo nombre es muy corto"
     pass
