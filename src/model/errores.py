@@ -46,3 +46,7 @@ class ErrorArchivoInexistente(Exception):
 class ErrorFormatoArchivoInvalido(Exception):
     "Se lanza cuando el archivo tiene un formato diferente al .vcf"
     pass
+
+class ErrorDatosNoNumericos(Exception):
+    "Se lanza cuando en vez de números, se ponen letras "
+    pass
