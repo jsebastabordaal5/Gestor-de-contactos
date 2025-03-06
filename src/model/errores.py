@@ -22,7 +22,7 @@ class NombreDeUnCaracter(Exception):
     "se lanza cuando un nombre tiene sólo un caracter"
     pass
 
-class TipoContactoInvalido:
+class TipoContactoInvalidoError(Exception):
     "Se lanza cuando se ingresa un tipo de contacto inválido"
     pass
 

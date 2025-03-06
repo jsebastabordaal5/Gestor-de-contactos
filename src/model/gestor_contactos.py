@@ -16,7 +16,7 @@ class GestorContactos:
     def editar_contacto(self, nombre_actual:str, nuevo_tipo: str = None , nuevo_nombre : str= None , nuevo_telefono: str = None ):
         pass
 
-    def importar_contactos (self,archivo):
+    def importar_contactos (self, archivo):
         pass
 
     def exportar_contactos(self,nombre_archivo: str):

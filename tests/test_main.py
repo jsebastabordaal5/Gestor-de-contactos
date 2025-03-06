@@ -3,7 +3,7 @@ from src.model.gestor_contactos import GestorContactos
 from src.model.contacto import Contacto
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
-    CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalido, \
+    CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalidoError, \
     ErrorDatosNoNumericos
 
 
@@ -52,7 +52,7 @@ def test_nombre_con_solo_1_caracter():
 
 def test_tipo_contacto_invalido():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(TipoContactoInvalido):
+    with pytest.raises(TipoContactoInvalidoError):
         contacto = Contacto("parcero", "juan gonzalez", "331 2498 3127")
 
 
@@ -142,7 +142,7 @@ def test_editar_contacto_nombre_vacio():
     usuario = Usuario("juan", "12345")
     usuario.gestor.registrar_contacto("personal", "samuel", "300222398")
 
-    with pytest.raises(NombreVacioError):
+    with pytest.raises(CampoVacio):
         usuario.gestor.editar_contacto("samuel", nuevo_nombre= "")
        
 
