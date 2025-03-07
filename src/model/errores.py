@@ -1,5 +1,4 @@
 class ContactoNoEncontradoError(Exception):
-    """Se lanza cuando un contacto no se encuentra en la lista."""
     pass
 
 class DatosInsuficientesError(Exception):
@@ -55,4 +54,18 @@ class ErrorCriterioInexistente(Exception):
 
 class ErrorNombreCaracterInvalido(Exception):
     "Se lanza cuando se ingresa un caracter extraño al nombre del contacto"
+    pass
+
+class ErrorUsuarioExistente(Exception):
+    pass
+
+
+class ErrorUsuarioNulo(Exception):
+    pass
+
+
+class ContraseñaInvalidaError(Exception):
+    pass
+
+class UsuarioInvalidoError(Exception):
     pass

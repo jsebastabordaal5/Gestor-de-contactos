@@ -1,10 +1,11 @@
 from src.model.usuario import Usuario
 from src.model.gestor_contactos import GestorContactos
 from src.model.contacto import Contacto
+from src.model.gestor_usuarios import GestorUsuarios
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
     CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalidoError, \
-    ErrorCriterioInexistente, ErrorNombreCaracterInvalido
+    ErrorCriterioInexistente, ErrorNombreCaracterInvalido, ErrorUsuarioExistente, ErrorUsuarioNulo, ContraseñaInvalidaError, UsuarioInvalidoError
 
 
 
@@ -49,13 +50,13 @@ def test_nombre_con_solo_1_caracter():
         contacto = Contacto("personal", "y", "331 2498 3127" )
 
 
-
+# Errores
 def test_tipo_contacto_invalido():
     usuario = Usuario("juan", "12345")
     with pytest.raises(TipoContactoInvalidoError):
         contacto = Contacto("parcero", "juan gonzalez", "331 2498 3127")
 
-# Errores
+
 def datos_no_numericos():
     usuario = Usuario("juan", "12345")
     with pytest.raises(NumeroInvalidoError):
@@ -71,76 +72,87 @@ def campos_vacios():
 
 
 #Requisito 2
+
+
 #Normales
+
 def test_editar_tipo_contacto ( ):
     usuario = Usuario("juan","12345")
-    usuario.gestor.registrar_contacto("personal","samuel","300222398")
-    usuario.gestor.editar_contacto("samuel", nuevo_tipo="profesional")
+    contacto=Contacto("personal","samuel","300222398")
+    usuario.gestor.registrar_contacto(contacto)
+    usuario.gestor.editar_contacto(contacto, nuevo_tipo="profesional")
     assert usuario.gestor.contactos[0].tipo == "profesional"
 
 def test_editar_nombre_contacto ( ):
     usuario = Usuario("juan","12345")
-    usuario.gestor.registrar_contacto("personal","samuel","300222398")
-    usuario.gestor.editar_contacto("samuel", nuevo_nombre="juan")
+    contacto=Contacto("personal","samuel","300222398")
+    usuario.gestor.registrar_contacto(contacto)
+    usuario.gestor.editar_contacto(contacto, nuevo_nombre="juan")
     assert usuario.gestor.contactos[0].nombre == "juan"
 
 def test_editar_numero_contacto ( ):
     usuario = Usuario("juan","12345")
-    usuario.gestor.registrar_contacto("personal","samuel","300222398")
-    usuario.gestor.editar_contacto("samuel",nuevo_telefono="3005680588")
+    contacto=Contacto("personal","samuel","300222398")
+    usuario.gestor.registrar_contacto(contacto)
+    usuario.gestor.editar_contacto(contacto,nuevo_telefono="3005680588")
     assert usuario.gestor.contactos[0].telefono == "3005680588"
 
 
-
-
 #Extremos
+
 def test_editar_contacto_nombre_extremadamente_corto():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("personal", "samuel", "3002223987")
-    
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NombreCortoError):
-        usuario.gestor.editar_contacto("samuel", nuevo_nombre="a")
+        usuario.gestor.editar_contacto(contacto, nuevo_nombre="a")
 
 
 def test_editar_contacto_numero_extremadamente_largo():
     usuario = Usuario("juan", "12345")
     numero_muy_largo = "1234567898765432123"
-    usuario.gestor.registrar_contacto("personal", "samuel", "3002223987")
-    
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NumeroInvalidoError):
-        usuario.gestor.editar_contacto("samuel",nuevo_telefono= numero_muy_largo)
+        usuario.gestor.editar_contacto(contacto, nuevo_telefono=numero_muy_largo)
+
 
 def test_editar_contacto_numero_invalido():
     usuario = Usuario("juan", "12345")
-    numero_corto= "1"
-    usuario.gestor.registrar_contacto("personal", "samuel", "300222398")  
-
-    with pytest.raises(NumeroInvalidoError): 
-        usuario.gestor.editar_contacto("samuel", numero_corto) 
+    numero_corto = "1"
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
+    with pytest.raises(NumeroInvalidoError):
+        usuario.gestor.editar_contacto(contacto, numero_corto)
 
 
 #Error
-def test_editar_contacto_no_existente():
+
+    def test_editar_contacto_no_existente():
         usuario = Usuario("juan", "12345")
-        usuario.gestor.registrar_contacto("personal","samuel","300222398")
+        contacto = Contacto("personal", "samuel", "300222398")
+        usuario.gestor.registrar_contacto(contacto)
 
         with pytest.raises(ContactoNoEncontradoError):
             usuario.gestor.editar_contacto("desconocido", nuevo_tipo="profesional")
-            
+
 
 def test_editar_contacto_sin_valores():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
 
     with pytest.raises(DatosInsuficientesError):
-        usuario.gestor.editar_contacto("samuel")  
+        usuario.gestor.editar_contacto(contacto)
 
 
 def test_editar_contacto_nombre_vacio():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(CampoVacio):
-        usuario.gestor.editar_contacto("samuel", nuevo_nombre= "")
+        usuario.gestor.editar_contacto(contacto, nuevo_nombre="")
+
 
 
 # Requisito 3
@@ -244,20 +256,19 @@ def test_filtrar_telefono_con_digitos_no_numericos():
 
 
 
-
-
        
 
-#Requisito 4
+# Requisito 4
 
-#Normales
+# Normales
 def test_exportar_contacto():
-   usuario = Usuario("juan", "12345")
-   usuario.gestor.registrar_contacto("personal", "samuel", "300222398")
+    usuario = Usuario("juan", "12345")
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
 
-   usuario.gestor.exportar_contactos("contactos.vcf")
+    usuario.gestor.exportar_contactos("contactos.vcf")
 
-   with open("contactos.vcf", "r") as archivo:
+    with open("contactos.vcf", "r") as archivo:
         contenido = archivo.read()
 
         esperado = """BEGIN:VCARD
@@ -284,14 +295,14 @@ END:VCARD""")
     assert usuario.gestor.contactos[0].nombre == "samuel"
     assert usuario.gestor.contactos[0].telefono == "300222398"
     assert usuario.gestor.contactos[0].tipo == "personal"
-    
-  
 
 
 def test_exportar_multiples_contactos():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_contacto("personal", "samuel", "300222398")
-    usuario.gestor.registrar_contacto("profesional", "ana", "3104567890")
+    contacto1 = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto1)
+    contacto2 = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto2)
 
     usuario.gestor.exportar_contactos("contactos.vcf")
 
@@ -312,18 +323,21 @@ END:VCARD"""
 
     assert esperado in contenido
 
+# Extremos
 
-#Extremos
+
 def test_exportar_contacto_nombre_largo():
     usuario = Usuario("juan", "12345")
-    nombre_largo = "a" * 200  
-    usuario.gestor.registrar_contacto("personal", nombre_largo, "300222398")
+    nombre_largo = "a" * 200
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.exportar_contactos("contactos.vcf")
 
     with open("contactos.vcf", "r") as archivo:
         contenido = archivo.read()
 
     assert f"FN:{nombre_largo}" in contenido
+
 
 def test_importar_contacto_archivo_vacio():
     with open("contactos_vacio.vcf", "w") as archivo:
@@ -334,12 +348,14 @@ def test_importar_contacto_archivo_vacio():
 
     assert len(usuario.gestor.contactos) == 1
 
+
 def test_exportar_importar_contacto_caracteres_especiales():
     usuario = Usuario("juan", "12345")
     nombre_especial = "José López 🎉✨"
     telefono_especial = "+57-300-555-6666"
-    
-    usuario.gestor.registrar_contacto("personal", nombre_especial, telefono_especial)
+
+    contacto = Contacto("personal", nombre_especial, telefono_especial)
+    usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.exportar_contactos("contactos_especiales.vcf")
 
     nuevo_usuario = Usuario("carlos", "54321")
@@ -353,7 +369,10 @@ def test_exportar_importar_contacto_caracteres_especiales():
 
     assert contacto_encontrado, "El contacto con caracteres especiales no fue importado correctamente."
 
-#Error
+
+
+# Errores
+
 def test_exportar_sin_contactos():
     usuario = Usuario("juan", "12345")
 
@@ -369,9 +388,224 @@ def test_importar_archivo_no_existente():
 
 def test_importar_archivo_formato_invalido():
     with open("formato_invalido.vcf", "w") as archivo:
-        archivo.write("CONTACTO: samuel, 300222398")  # 
+        archivo.write("CONTACTO: samuel, 300222398")  #
 
     usuario = Usuario("juan", "12345")
 
     with pytest.raises(ErrorFormatoArchivoInvalido):
         usuario.gestor.importar_contactos("formato_invalido.vcf")
+
+
+
+# Requisito 5
+
+# Normales
+
+def test_exportar_sin_contactos():
+    usuario = Usuario("juan", "12345")
+
+    with pytest.raises(ErrorSinContactos):
+        usuario.gestor.exportar_contactos("contactos.vcf")
+
+
+def test_importar_archivo_no_existente():
+    usuario = Usuario("juan", "12345")
+
+    with pytest.raises(ErrorArchivoInexistente):
+        usuario.gestor.importar_contactos("archivo_inexistente.vcf")
+
+def test_importar_archivo_formato_invalido():
+    with open("formato_invalido.vcf", "w") as archivo:
+        archivo.write("CONTACTO: samuel, 300222398")  #
+
+    usuario = Usuario("juan", "12345")
+
+    with pytest.raises(ErrorFormatoArchivoInvalido):
+        usuario.gestor.importar_contactos("formato_invalido.vcf")
+
+
+
+#Requisito 5
+
+#Normales
+
+def test_registrar_usuario():
+    gestor = GestorUsuarios()
+    usuario_nuevo = Usuario("juan", "password123")
+
+    gestor.registrar_usuario(usuario_nuevo)
+
+    assert usuario_nuevo in gestor.usuarios
+
+def test_registrar_multiples_usuarios():
+    gestor = GestorUsuarios()
+    usuario1 = Usuario("juan", "password123")
+    usuario2 = Usuario("maria", "password321")
+
+    gestor.registrar_usuario(usuario1)
+    gestor.registrar_usuario(usuario2)
+
+    assert usuario1 in gestor.usuarios
+    assert usuario2 in gestor.usuarios
+
+def test_registrar_usuario_nombre_duplicado():
+    gestor = GestorUsuarios()
+    usuario1 = Usuario("juan", "password123")
+    usuario2 = Usuario("juan", "otraClave456")
+
+    gestor.registrar_usuario(usuario1)
+    gestor.registrar_usuario(usuario2)
+
+    assert len(gestor.usuarios) == 2
+
+
+# Extremos
+
+def test_registrar_usuario_nombre_contraseña_largos():
+    gestor = GestorUsuarios()
+    nombre_largo = "a" * 500  # Nombre 100 caracteres
+    contraseña_larga = "b" * 500  # Contraseña de 100 caracteres
+    usuario = Usuario(nombre_largo, contraseña_larga)
+
+    gestor.registrar_usuario(usuario)
+
+    assert len(gestor.usuarios) == 1
+    assert gestor.usuarios[0].nombre == nombre_largo
+    assert gestor.usuarios[0].contraseña == contraseña_larga
+
+def test_registrar_usuario_caracteres_especiales():
+    gestor = GestorUsuarios()
+    usuario = Usuario("J@hn_Doe 123", "P@ssw0rd!")
+
+    gestor.registrar_usuario(usuario)
+
+    assert len(gestor.usuarios) == 1
+    assert gestor.usuarios[0].nombre == "J@hn_Doe 123"
+    assert gestor.usuarios[0].contraseña == "P@ssw0rd!"
+
+def test_registrar_usuario_con_espacios_limpiados():
+    gestor = GestorUsuarios()
+    nombre_original = "  usuario con espacios  "
+    contraseña_original = "  contraseña con espacios  "
+    usuario = Usuario(nombre_original, contraseña_original)
+
+    gestor.registrar_usuario(usuario)
+
+    nombre_esperado = "usuario con espacios"
+    contraseña_esperada = "contraseña con espacios"
+
+    assert len(gestor.usuarios) == 1
+    assert gestor.usuarios[0].nombre == nombre_esperado
+    assert gestor.usuarios[0].contraseña == contraseña_esperada
+
+
+# Errores
+
+def test_registrar_usuario_nulo():
+    gestor = GestorUsuarios()
+    usuario_nulo = None
+
+    with pytest.raises(ErrorUsuarioNulo):
+        gestor.registrar_usuario(usuario_nulo)
+
+
+def test_registrar_usuario_duplicado():
+    gestor = GestorUsuarios()
+    usuario1 = Usuario("usuarioRepetido", "contraseña123")
+    usuario2 = Usuario("usuarioRepetido", "otraContraseña")
+
+    gestor.registrar_usuario(usuario1)
+
+    with pytest.raises(ErrorUsuarioExistente):
+        gestor.registrar_usuario(usuario2)
+
+
+def test_registrar_usuario_tipo_incorrecto():
+    gestor = GestorUsuarios()
+    usuario_incorrecto = "Este es un string, no un objeto Usuario"
+
+    with pytest.raises(TypeError):
+        gestor.registrar_usuario(usuario_incorrecto)
+
+
+
+
+# Requisito 6
+
+# Normales
+def test_credenciales_correctas():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_usuario(usuario)
+    resultado = usuario.gestor.iniciar_sesion("juan", "12345")
+    assert resultado is True
+
+
+def test_iniciar_sesion_despues_de_registrar():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_usuario(usuario)
+    resultado = usuario.gestor.iniciar_sesion("juan", "12345")
+    assert resultado is True
+
+
+def test_volver_iniciar_sesion_despues_de_cerrar_sesion():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_usuario(usuario)
+    resultado1 = usuario.gestor.iniciar_sesion("mario", "67890")
+    assert resultado1 is True
+    usuario.gestor.cerrar_sesion("juan")
+    resultado2 = usuario.gestor.iniciar_sesion("juan", "12345")
+    assert resultado2 is True
+
+
+# Extremos
+def test_iniciar_sesion_con_credenciales_extremadamente_largas():
+    usuario = Usuario("juan garzón garzón villa sanchez", "124346gsuyh2tn_@")
+    usuario.gestor.registrar_usuario(usuario)
+    resultado = usuario.gestor.iniciar_sesion("juan garzón garzón villa sanchez", "124346gsuyh2tn_@")
+    assert resultado is True
+
+
+def test_iniciar_sesion_con_mayusculas_y_minusculas():
+    usuario = Usuario("Juan", "ClaveSegura123")
+    usuario.gestor.registrar_usuario(usuario)
+    resultado1 = usuario.gestor.iniciar_sesion("Juan", "ClaveSegura123")
+    resultado2 = usuario.gestor.iniciar_sesion("juan", "claveSegura123")
+    assert resultado1 is False
+    assert resultado2 is False
+
+
+def test_iniciar_sesion_en_multiples_dispositivos():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.registrar_usuario(usuario)
+    resultado1 = usuario.gestor.iniciar_sesion("juan", "12345")
+    assert resultado1 is True
+    resultado2 = usuario.gestor.iniciar_sesion("juan", "12345")
+    assert resultado2 is True
+
+
+# Error
+def test_iniciar_sesion_usuario_no_existente():
+    gestor = GestorUsuarios()
+
+    # Intentar iniciar sesión con un usuario que no existe
+    with pytest.raises(ErrorUsuarioNulo):
+        gestor.iniciar_sesion("usuario_inexistente", "clave123")
+
+def test_iniciar_sesion_con_contraseña_vacia():
+    gestor = GestorUsuarios()
+    usuario = Usuario("juan", "12345")
+    gestor.registrar_usuario(usuario)
+
+    # Intentar iniciar sesión con una contraseña vacía
+    with pytest.raises(ContraseñaInvalidaError):
+        gestor.iniciar_sesion("carlos", "")
+
+def test_iniciar_sesion_con_usuario_vacio():
+    gestor = GestorUsuarios()
+    usuario = Usuario("juan", "12345")
+    gestor.registrar_usuario(usuario)
+
+    # Intentar iniciar sesión con un nombre de usuario vacío
+    with pytest.raises(UsuarioInvalidoError):
+        gestor.iniciar_sesion("", "12345")
+
