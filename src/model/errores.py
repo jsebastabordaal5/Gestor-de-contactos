@@ -24,7 +24,6 @@ class NombreVacioError(Exception):
 class NombreCortoError(Exception):
     # Se lanza cuando el campo de nuevo nombre es demasiado corto
     def __init__(self, mensaje="El nombre es demasiado corto. Debe tener al menos 2 caracteres."):
-        """Inicializa la excepción con un mensaje opcional."""
         super().__init__(mensaje)
 
 class ContraseñaVaciaError(Exception):
