@@ -2,7 +2,7 @@ from src.model.contacto import Contacto
 
 class GestorContactos:
     def __init__(self):
-        self.contactos = []
+        self.contactos: list[Contacto] = []
 
 
     def ver_contactos(self):

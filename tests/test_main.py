@@ -128,13 +128,13 @@ def test_editar_contacto_numero_invalido():
 
 #Error
 
-    def test_editar_contacto_no_existente():
-        usuario = Usuario("juan", "12345")
-        contacto = Contacto("personal", "samuel", "300222398")
-        usuario.gestor.registrar_contacto(contacto)
+def test_editar_contacto_no_existente():
+    usuario = Usuario("juan", "12345")
+    contacto = Contacto("personal", "samuel", "300222398")
+    usuario.gestor.registrar_contacto(contacto)
 
-        with pytest.raises(ContactoNoEncontradoError):
-            usuario.gestor.editar_contacto("desconocido", nuevo_tipo="profesional")
+    with pytest.raises(ContactoNoEncontradoError):
+        usuario.gestor.editar_contacto("desconocido", nuevo_tipo="profesional")
 
 
 def test_editar_contacto_sin_valores():
@@ -182,7 +182,7 @@ def test_filtrar_contactos_por_telefono():
         Contacto("profesional", "Ana López", "555654321"),
         Contacto("profesional", "Carlos Gómez", "309482213"),
     ]
-    resultado = usuario.gestor.filtrar_contactos('telefono', '314')
+    resultado = usuario.gestor.filtrar_contactos('telefono', '3146272068')
 
     esperado = [
         Contacto("personal", "Juan Rodríguez", "3146272068")
@@ -209,11 +209,49 @@ def test_filtrar_contactos_por_tipo():
 
 # Extremos
 
-def test_filtrar_lista_vacia():
+def test_filtrar_contacto_por_parte_del_telefono():
     usuario = Usuario("juan", "12345")
-    usuario.gestor.contactos = []
-    resultado = usuario.gestor.filtrar_contactos("nombre", "Carlos")
-    assert resultado == []
+    usuario.gestor.contactos = [
+        Contacto("personal", "Juan Rodríguez", "3146272068"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "314482213")
+    ]
+    resultado = usuario.gestor.filtrar_contactos('telefono', '314')
+    esperado = [
+        Contacto("profesional", "Carlos Gómez", "314482213"),
+        Contacto("personal", "Juan Rodríguez", "3146272068")
+    ]
+    assert resultado == esperado
+
+
+def test_filtrar_contacto_por_parte_del_nombre():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "Juan Rodríguez", "3146272068"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "314482213")
+    ]
+    resultado = usuario.gestor.filtrar_contactos('nombre', 'Juan')
+    esperado = [
+        Contacto("personal", "Juan Rodríguez", "3146272068")
+    ]
+    assert resultado == esperado
+
+
+def test_filtrar_contactos_cuando_todos_son_del_mismo_tipo():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("profesional", "Juan Pérez", "3146272068"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "314482213")
+    ]
+    resultado = usuario.gestor.filtrar_contactos('tipo', 'profesional')
+    esperado = [
+        Contacto("profesional", "Juan Pérez", "3146272068"),
+        Contacto("profesional", "Ana López", "555654321"),
+        Contacto("profesional", "Carlos Gómez", "314482213")
+    ]
+    assert resultado == esperado
 
 
 # Errores
