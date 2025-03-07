@@ -75,7 +75,6 @@ def campos_vacios():
 
 
 #Normales
-
 def test_editar_tipo_contacto ( ):
     usuario = Usuario("juan","12345")
     contacto=Contacto("personal","samuel","300222398")
@@ -99,14 +98,12 @@ def test_editar_numero_contacto ( ):
 
 
 #Extremos
-
 def test_editar_contacto_nombre_extremadamente_corto():
     usuario = Usuario("juan", "12345")
     contacto = Contacto("personal", "samuel", "300222398")
     usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NombreCortoError):
         usuario.gestor.editar_contacto(contacto, nuevo_nombre="a")
-
 
 def test_editar_contacto_numero_extremadamente_largo():
     usuario = Usuario("juan", "12345")
@@ -115,7 +112,6 @@ def test_editar_contacto_numero_extremadamente_largo():
     usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NumeroInvalidoError):
         usuario.gestor.editar_contacto(contacto, nuevo_telefono=numero_muy_largo)
-
 
 def test_editar_contacto_numero_invalido():
     usuario = Usuario("juan", "12345")
@@ -279,7 +275,6 @@ def test_filtrar_nombre_caracter_invalido():
         usuario.gestor.filtrar_contactos("nombre", "C@rlos")
 
 
-
 def test_filtrar_telefono_con_digitos_no_numericos():
     usuario = Usuario("juan", "12345")
     usuario.gestor.contactos = [
@@ -417,7 +412,6 @@ def test_exportar_sin_contactos():
     with pytest.raises(ErrorSinContactos):
         usuario.gestor.exportar_contactos("contactos.vcf")
 
-
 def test_importar_archivo_no_existente():
     usuario = Usuario("juan", "12345")
 
@@ -433,33 +427,6 @@ def test_importar_archivo_formato_invalido():
     with pytest.raises(ErrorFormatoArchivoInvalido):
         usuario.gestor.importar_contactos("formato_invalido.vcf")
 
-
-
-# Requisito 5
-
-# Normales
-
-def test_exportar_sin_contactos():
-    usuario = Usuario("juan", "12345")
-
-    with pytest.raises(ErrorSinContactos):
-        usuario.gestor.exportar_contactos("contactos.vcf")
-
-
-def test_importar_archivo_no_existente():
-    usuario = Usuario("juan", "12345")
-
-    with pytest.raises(ErrorArchivoInexistente):
-        usuario.gestor.importar_contactos("archivo_inexistente.vcf")
-
-def test_importar_archivo_formato_invalido():
-    with open("formato_invalido.vcf", "w") as archivo:
-        archivo.write("CONTACTO: samuel, 300222398")  #
-
-    usuario = Usuario("juan", "12345")
-
-    with pytest.raises(ErrorFormatoArchivoInvalido):
-        usuario.gestor.importar_contactos("formato_invalido.vcf")
 
 
 
@@ -470,9 +437,7 @@ def test_importar_archivo_formato_invalido():
 def test_registrar_usuario():
     gestor = GestorUsuarios()
     usuario_nuevo = Usuario("juan", "password123")
-
     gestor.registrar_usuario(usuario_nuevo)
-
     assert usuario_nuevo in gestor.usuarios
 
 def test_registrar_multiples_usuarios():
@@ -647,7 +612,6 @@ def test_iniciar_sesion_con_usuario_vacio():
     usuario = Usuario("juan", "12345")
     gestor.registrar_usuario(usuario)
 
-    # Intentar iniciar sesión con un nombre de usuario vacío
     with pytest.raises(UsuarioInvalidoError):
         gestor.iniciar_sesion("", "12345")
 
