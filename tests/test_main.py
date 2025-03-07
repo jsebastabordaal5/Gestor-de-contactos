@@ -4,8 +4,8 @@ from src.model.contacto import Contacto
 from src.model.gestor_usuarios import GestorUsuarios
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError,  NombreCortoError, \
-    CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroInvalidoError,  TipoContactoError, \
-    ErrorCriterioInexistente, ErrorNombreCaracterInvalido, ErrorUsuarioExistente, ErrorUsuarioNulo, ContraseñaInvalidaError, UsuarioInvalidoError
+    NombreVacioError, DatosNoNumericosError, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroInvalidoError,  TipoContactoError, \
+    ErrorCriterioInexistente,  ErrorUsuarioExistente, ErrorUsuarioInexistente, ErrorUsuarioNulo, ContraseñaVaciaError, ErrorNombreCaracterInvalido
 
 
 
@@ -59,12 +59,12 @@ def test_tipo_contacto_invalido():
 
 def test_datos_no_numericos():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(NumeroInvalidoError):
+    with pytest.raises(DatosNoNumericosError):
         contacto = Contacto("profesional", "juan gonzalez", "3abc 233 447")
 
 def test_campos_vacios():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(CampoVacio):
+    with pytest.raises(NombreVacioError):
         contacto1 = Contacto(" ", "juan gonzalez", "331 2498 3127")
         contacto2 = Contacto("profesional ", " ", "331 2498 3127")
         contacto3 = Contacto("profesional", "juan gonzalez", " ")
@@ -146,7 +146,7 @@ def test_editar_contacto_nombre_vacio():
     usuario = Usuario("juan", "12345")
     contacto = Contacto("personal", "samuel", "300222398")
     usuario.gestor.registrar_contacto(contacto)
-    with pytest.raises(CampoVacio):
+    with pytest.raises(NombreVacioError):
         usuario.gestor.editar_contacto(contacto, nuevo_nombre="")
 
 
@@ -283,7 +283,7 @@ def test_filtrar_telefono_con_digitos_no_numericos():
         Contacto("profesional", "juan mecanico", "315665432"),
     ]
 
-    with pytest.raises(NumeroInvalidoError):
+    with pytest.raises(DatosNoNumericosError):
         usuario.gestor.filtrar_contactos("telefono", "abc 123 cde")
 
 
@@ -595,16 +595,15 @@ def test_iniciar_sesion_en_multiples_dispositivos():
 # Error
 def test_iniciar_sesion_usuario_no_existente():
     gestor = GestorUsuarios()
-
     # Intentar iniciar sesión con un usuario que no existe
-    with pytest.raises(ErrorUsuarioNulo):
+    with pytest.raises(ErrorUsuarioInexistente):
         gestor.iniciar_sesion("usuario_inexistente", "clave123")
 
 def test_iniciar_sesion_con_contraseña_vacia():
     gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
     gestor.registrar_usuario(usuario)
-    with pytest.raises(ContraseñaInvalidaError):
+    with pytest.raises(ContraseñaVaciaError):
         gestor.iniciar_sesion("carlos", "")
 
 def test_iniciar_sesion_con_usuario_vacio():
@@ -612,6 +611,6 @@ def test_iniciar_sesion_con_usuario_vacio():
     usuario = Usuario("juan", "12345")
     gestor.registrar_usuario(usuario)
 
-    with pytest.raises(UsuarioInvalidoError):
+    with pytest.raises(NombreVacioError):
         gestor.iniciar_sesion("", "12345")
 

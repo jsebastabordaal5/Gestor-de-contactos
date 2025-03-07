@@ -27,6 +27,12 @@ class NombreCortoError(Exception):
         """Inicializa la excepción con un mensaje opcional."""
         super().__init__(mensaje)
 
+class ContraseñaVaciaError(Exception):
+    def __init__(self, mensaje="Contraseña Vacía"):
+        super().__init__(mensaje)
+
+
+
 
 class ErrorSinContactos(Exception):
     def __init__(self, mensaje="No hay contactos para exportar."):
@@ -56,13 +62,13 @@ class ErrorUsuarioYaExistente(Exception):
     def __init__(self, nombre_usuario):
         super().__init__(f"El usuario '{nombre_usuario}' ya está registrado. Elija un nombre diferente.")
 
-class DatosInsuficientesError(Exception):
-#     """Se lanza cuando no se proporcionan datos para editar un contacto."""    pass
+class ErrorUsuarioInexistente(Exception):
+    def __init__(self):
+        super().__init__(f"Usuario Inexistente")
 
 
-class NombreVacioError(Exception):
-#     "se lanza cuando el campo de nuevo nombre es vacio"
-#     pass
+
+
 
 class NombreLargoError(Exception):
     def __init__(self, nombre):
@@ -70,28 +76,35 @@ class NombreLargoError(Exception):
 
 
 class NombreCortoError(Exception):
-#     "se lanza cuando el campo de nuevo nombre es muy corto"
-#     pass
+    def __init__(self, nombre):
+        super().__init__(f"El nombre'{nombre}' es demasiado corto")
+
 
 class ErrorSinContactos(Exception):
-#     "Se lanza cuando no hay contactos para exportar"
-#     pass
+    def __init__(self):
+        super().__init__(f"No hay contactos para exportar")
+
 
 class ErrorArchivoInexistente(Exception):
-#     "Se lanza cuando el archivo no existe"
-#     pass
+    def __init__(self):
+        super().__init__(f"Formato archivo inexistente")
+
 
 class ErrorFormatoArchivoInvalido(Exception):
-#     "Se lanza cuando el archivo tiene un formato diferente al .vcf"
-#     pass
+      def __init__(self):
+        super().__init__(f"Formato archivo inválido")
 
-class ErrorUsuarioNulo(Exception):
-#     "se lanza cuando se trata de crear un usuario nulo"
-#     pass
+class ErrorNombreCaracterInvalido(Exception):
+    def __init__(self, nombre):
+        super().__init__(f"nombre: {nombre} es inválido")
 
-class ErrorUsuarioYaExistente(Exception):
-#     "se lanza cuando se trata de crear un usuario ya existente"
-#     pass
+
+class ErrorUsuarioExistente(Exception):
+    def __init__(self):
+        super().__init__(f"El usuario es existente!")
+
+
+#  pass
 
 class TipoContactoError(Exception):
     def __init__(self, tipo):
@@ -100,6 +113,16 @@ class TipoContactoError(Exception):
 
 
 class DatosNoNumericosError(Exception):
+    def __init__(self, telefono):
+        super().__init__(f"El telefono: {telefono} no es válido")
+
+class ErrorCriterioInexistente(Exception):
+    def __init__(self, criterio):
+        super().__init__(f"El criterio: {criterio} es inexistente")
+
+
+
+
 
 
 
