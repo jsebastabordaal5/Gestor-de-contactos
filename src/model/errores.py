@@ -1,71 +1,106 @@
 class ContactoNoEncontradoError(Exception):
-    pass
+    def __init__(self, contacto):
+        super().__init__(f"El contacto '{contacto}' no fue encontrado")
+
 
 class DatosInsuficientesError(Exception):
-    """Se lanza cuando no se proporcionan datos para editar un contacto."""
-    pass
+    # Se lanza cuando no se proporciona al menos un dato para editar un contacto
+    def __init__(self):
+        super().__init__("Debe proporcionar al menos un dato para modificar el contacto.")
+
 
 class NumeroInvalidoError(Exception):
-    "se lanza cuando el numero de telefono tiene dígitos no numéricos"
-    pass
-
-class CampoVacio(Exception):
-    "se lanza cuando los campos es vacio"
-    pass
-
-class NumeroLargoError(Exception):
-    "se lanza cuando el teléfono excede los 10 dígitos"
-    pass
-
-class NombreDeUnCaracter(Exception):
-    "se lanza cuando un nombre tiene sólo un caracter"
-    pass
-
-class TipoContactoInvalidoError(Exception):
-    "Se lanza cuando se ingresa un tipo de contacto inválido"
-    pass
+    # Se lanza cuando el número de teléfono tiene menos o más de 10 dígitos
+    def __init__(self, mensaje="El número de teléfono debe tener exactamente 10 dígitos"):
+        super().__init__(mensaje)
 
 
-class NombreLargoError(Exception):
-    "Se lanza cuando el nombre supera los 15 caracteres"
-    pass
+class NombreVacioError(Exception):
+    # Se lanza cuando el campo de nuevo nombre está vacío
+    def __init__(self, mensaje="El nombre no puede estar vacío"):
+        super().__init__(mensaje)
+
 
 class NombreCortoError(Exception):
-    "se lanza cuando el campo de nuevo nombre es muy corto"
-    pass
+    # Se lanza cuando el campo de nuevo nombre es demasiado corto
+    def __init__(self, mensaje="El nombre es demasiado corto. Debe tener al menos 2 caracteres."):
+        """Inicializa la excepción con un mensaje opcional."""
+        super().__init__(mensaje)
+
 
 class ErrorSinContactos(Exception):
-    "Se lanza cuando no hay contactos para exportar"
-    pass
+    def __init__(self, mensaje="No hay contactos para exportar."):
+        super().__init__(mensaje)
+
 
 class ErrorArchivoInexistente(Exception):
-    "Se lanza cuando el archivo no existe"
-    pass
+    def __init__(self, archivo: str):
+        super().__init__(f"El archivo '{archivo}' no existe. Verifique la ruta y el nombre del archivo.")
+
 
 class ErrorFormatoArchivoInvalido(Exception):
-    "Se lanza cuando el archivo tiene un formato diferente al .vcf"
-    pass
-
-
-
-class ErrorCriterioInexistente(Exception):
-    "Se lanza cuando se ingresa un campo inexistente"
-    pass
-
-class ErrorNombreCaracterInvalido(Exception):
-    "Se lanza cuando se ingresa un caracter extraño al nombre del contacto"
-    pass
-
-class ErrorUsuarioExistente(Exception):
-    pass
+    # Se lanza cuando el archivo tiene un formato diferente al .vcf
+    def __init__(self, archivo: str):
+        super().__init__(
+            f"El archivo '{archivo}' no tiene un formato VCF válido. Verifique el contenido y la estructura.")
 
 
 class ErrorUsuarioNulo(Exception):
-    pass
+    # se lanza cuando se trata de crear un usuario nulo
+    def __init__(self):
+        super().__init__("No se puede registrar un usuario nulo. Verifique los datos de entrada.")
 
 
-class ContraseñaInvalidaError(Exception):
-    pass
+class ErrorUsuarioYaExistente(Exception):
+    # se lanza cuando se trata de crear un usuario ya existente
+    def __init__(self, nombre_usuario):
+        super().__init__(f"El usuario '{nombre_usuario}' ya está registrado. Elija un nombre diferente.")
 
-class UsuarioInvalidoError(Exception):
-    pass
+class DatosInsuficientesError(Exception):
+#     """Se lanza cuando no se proporcionan datos para editar un contacto."""    pass
+
+
+class NombreVacioError(Exception):
+#     "se lanza cuando el campo de nuevo nombre es vacio"
+#     pass
+
+class NombreLargoError(Exception):
+    def __init__(self, nombre):
+        super().__init__(f"El nombre'{nombre}' excede los 15 caracteres")
+
+
+class NombreCortoError(Exception):
+#     "se lanza cuando el campo de nuevo nombre es muy corto"
+#     pass
+
+class ErrorSinContactos(Exception):
+#     "Se lanza cuando no hay contactos para exportar"
+#     pass
+
+class ErrorArchivoInexistente(Exception):
+#     "Se lanza cuando el archivo no existe"
+#     pass
+
+class ErrorFormatoArchivoInvalido(Exception):
+#     "Se lanza cuando el archivo tiene un formato diferente al .vcf"
+#     pass
+
+class ErrorUsuarioNulo(Exception):
+#     "se lanza cuando se trata de crear un usuario nulo"
+#     pass
+
+class ErrorUsuarioYaExistente(Exception):
+#     "se lanza cuando se trata de crear un usuario ya existente"
+#     pass
+
+class TipoContactoError(Exception):
+    def __init__(self, tipo):
+        super().__init__(f"El tipo de contacto: {tipo} es inválido")
+
+
+
+class DatosNoNumericosError(Exception):
+
+
+
+

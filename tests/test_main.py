@@ -3,8 +3,8 @@ from src.model.gestor_contactos import GestorContactos
 from src.model.contacto import Contacto
 from src.model.gestor_usuarios import GestorUsuarios
 
-from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
-    CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalidoError, \
+from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError,  NombreCortoError, \
+    CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroInvalidoError,  TipoContactoError, \
     ErrorCriterioInexistente, ErrorNombreCaracterInvalido, ErrorUsuarioExistente, ErrorUsuarioNulo, ContraseñaInvalidaError, UsuarioInvalidoError
 
 
@@ -41,28 +41,28 @@ def test_nombre_con_mas_de_15_caracteres():
 
 def test_telefono_mas_de_10_digitos():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(NumeroLargoError):
+    with pytest.raises(NumeroInvalidoError):
         contacto = Contacto("personal", "Samuel Flórez", "99999999999999999" )
 
 def test_nombre_con_solo_1_caracter():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(NombreDeUnCaracter):
+    with pytest.raises(NombreCortoError):
         contacto = Contacto("personal", "y", "331 2498 3127" )
 
 
 # Errores
 def test_tipo_contacto_invalido():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(TipoContactoInvalidoError):
+    with pytest.raises(TipoContactoError):
         contacto = Contacto("parcero", "juan gonzalez", "331 2498 3127")
 
 
-def datos_no_numericos():
+def test_datos_no_numericos():
     usuario = Usuario("juan", "12345")
     with pytest.raises(NumeroInvalidoError):
         contacto = Contacto("profesional", "juan gonzalez", "3abc 233 447")
 
-def campos_vacios():
+def test_campos_vacios():
     usuario = Usuario("juan", "12345")
     with pytest.raises(CampoVacio):
         contacto1 = Contacto(" ", "juan gonzalez", "331 2498 3127")
