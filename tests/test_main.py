@@ -553,10 +553,10 @@ def test_volver_iniciar_sesion_despues_de_cerrar_sesion():
     gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
     gestor.registrar_usuario(usuario)
-    resultado1 = usuario.gestor.iniciar_sesion("juan", "12345")
+    resultado1 = gestor.iniciar_sesion("juan", "12345")
     assert isinstance(resultado1, Usuario)
-    gestor.cerrar_sesion("juan")
-    resultado2 = usuario.gestor.iniciar_sesion("juan", "12345")
+    gestor.cerrar_sesion()
+    resultado2 = gestor.iniciar_sesion("juan", "12345")
     assert isinstance(resultado2, Usuario)
 
 
