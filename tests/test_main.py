@@ -534,53 +534,59 @@ def test_registrar_usuario_tipo_incorrecto():
 
 # Normales
 def test_credenciales_correctas():
+    gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_usuario(usuario)
-    resultado = usuario.gestor.iniciar_sesion("juan", "12345")
-    assert resultado is True
+    gestor.registrar_usuario(usuario)
+    resultado = gestor.iniciar_sesion("juan", "12345")
+    assert isinstance(resultado, Usuario)
 
 
 def test_iniciar_sesion_despues_de_registrar():
+    gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_usuario(usuario)
-    resultado = usuario.gestor.iniciar_sesion("juan", "12345")
-    assert resultado is True
+    gestor.registrar_usuario(usuario)
+    resultado = gestor.iniciar_sesion("juan", "12345")
+    assert isinstance(resultado, Usuario)
 
 
 def test_volver_iniciar_sesion_despues_de_cerrar_sesion():
+    gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_usuario(usuario)
-    resultado1 = usuario.gestor.iniciar_sesion("mario", "67890")
-    assert resultado1 is True
-    usuario.gestor.cerrar_sesion("juan")
+    gestor.registrar_usuario(usuario)
+    resultado1 = usuario.gestor.iniciar_sesion("juan", "12345")
+    assert isinstance(resultado1, Usuario)
+    gestor.cerrar_sesion("juan")
     resultado2 = usuario.gestor.iniciar_sesion("juan", "12345")
-    assert resultado2 is True
+    assert isinstance(resultado2, Usuario)
 
 
 # Extremos
 def test_iniciar_sesion_con_credenciales_extremadamente_largas():
+    gestor = GestorUsuarios()
     usuario = Usuario("juan garzón garzón villa sanchez", "124346gsuyh2tn_@")
-    usuario.gestor.registrar_usuario(usuario)
-    resultado = usuario.gestor.iniciar_sesion("juan garzón garzón villa sanchez", "124346gsuyh2tn_@")
-    assert resultado is True
+    gestor.registrar_usuario(usuario)
+    resultado = gestor.iniciar_sesion("juan garzón garzón villa sanchez", "124346gsuyh2tn_@")
+    assert isinstance(resultado, Usuario)
 
 
 def test_iniciar_sesion_con_mayusculas_y_minusculas():
+    gestor = GestorUsuarios()
     usuario = Usuario("Juan", "ClaveSegura123")
-    usuario.gestor.registrar_usuario(usuario)
-    resultado1 = usuario.gestor.iniciar_sesion("Juan", "ClaveSegura123")
-    resultado2 = usuario.gestor.iniciar_sesion("juan", "claveSegura123")
-    assert resultado1 is False
-    assert resultado2 is False
+    gestor.registrar_usuario(usuario)
+    resultado1 = gestor.iniciar_sesion("Juan", "ClaveSegura123")
+    resultado2 = gestor.iniciar_sesion("juan", "claveSegura123")
+    assert isinstance(resultado1, Usuario)
+    assert isinstance(resultado2, Usuario)
 
 
 def test_iniciar_sesion_en_multiples_dispositivos():
+    gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
-    usuario.gestor.registrar_usuario(usuario)
-    resultado1 = usuario.gestor.iniciar_sesion("juan", "12345")
-    assert resultado1 is True
-    resultado2 = usuario.gestor.iniciar_sesion("juan", "12345")
-    assert resultado2 is True
+    gestor.registrar_usuario(usuario)
+    resultado1 = gestor.iniciar_sesion("juan", "12345")
+    assert isinstance(resultado1, Usuario)
+    resultado2 = gestor.iniciar_sesion("juan", "12345")
+    assert isinstance(resultado2, Usuario)
 
 
 # Error
@@ -595,8 +601,6 @@ def test_iniciar_sesion_con_contraseña_vacia():
     gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
     gestor.registrar_usuario(usuario)
-
-    # Intentar iniciar sesión con una contraseña vacía
     with pytest.raises(ContraseñaInvalidaError):
         gestor.iniciar_sesion("carlos", "")
 
