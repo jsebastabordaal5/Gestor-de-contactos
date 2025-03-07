@@ -7,7 +7,7 @@ class DatosInsuficientesError(Exception):
     pass
 
 class NumeroInvalidoError(Exception):
-    "se lanza cuando el numero de telefono tiene menos de 10 digitos o mas de 10"
+    "se lanza cuando el numero de telefono tiene dígitos no numéricos"
     pass
 
 class CampoVacio(Exception):
@@ -47,9 +47,7 @@ class ErrorFormatoArchivoInvalido(Exception):
     "Se lanza cuando el archivo tiene un formato diferente al .vcf"
     pass
 
-class ErrorDatosNoNumericos(Exception):
-    "Se lanza cuando en vez de números, se ponen letras "
-    pass
+
 
 class ErrorCriterioInexistente(Exception):
     "Se lanza cuando se ingresa un campo inexistente"
@@ -57,4 +55,4 @@ class ErrorCriterioInexistente(Exception):
 
 class ErrorNombreCaracterInvalido(Exception):
     "Se lanza cuando se ingresa un caracter extraño al nombre del contacto"
-    pas
+    pass

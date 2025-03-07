@@ -4,7 +4,7 @@ from src.model.contacto import Contacto
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
     CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalidoError, \
-    ErrorDatosNoNumericos, ErrorCriterioInexistente, ErrorNombreCaracterInvalido
+    ErrorCriterioInexistente, ErrorNombreCaracterInvalido
 
 
 
@@ -55,10 +55,10 @@ def test_tipo_contacto_invalido():
     with pytest.raises(TipoContactoInvalidoError):
         contacto = Contacto("parcero", "juan gonzalez", "331 2498 3127")
 
-
+# Errores
 def datos_no_numericos():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(ErrorDatosNoNumericos):
+    with pytest.raises(NumeroInvalidoError):
         contacto = Contacto("profesional", "juan gonzalez", "3abc 233 447")
 
 def campos_vacios():
@@ -227,6 +227,22 @@ def test_filtrar_nombre_caracter_invalido():
 
     with pytest.raises(ErrorNombreCaracterInvalido):
         usuario.gestor.filtrar_contactos("nombre", "C@rlos")
+
+
+
+def test_filtrar_telefono_con_digitos_no_numericos():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "mateo lópez", "329050614"),
+        Contacto("profesional", "carlos manuel", "399888765"),
+        Contacto("profesional", "juan mecanico", "315665432"),
+    ]
+
+    with pytest.raises(NumeroInvalidoError):
+        usuario.gestor.filtrar_contactos("telefono", "abc 123 cde")
+
+
+
 
 
 
