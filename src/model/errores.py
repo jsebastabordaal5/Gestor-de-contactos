@@ -50,3 +50,11 @@ class ErrorFormatoArchivoInvalido(Exception):
 class ErrorDatosNoNumericos(Exception):
     "Se lanza cuando en vez de números, se ponen letras "
     pass
+
+class ErrorCriterioInexistente(Exception):
+    "Se lanza cuando se ingresa un campo inexistente"
+    pass
+
+class ErrorNombreCaracterInvalido(Exception):
+    "Se lanza cuando se ingresa un caracter extraño al nombre del contacto"
+    pas

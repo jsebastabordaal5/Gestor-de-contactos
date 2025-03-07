@@ -19,7 +19,7 @@ class GestorContactos:
     def importar_contactos (self, archivo):
         pass
 
-    def filtrar_contactos(self, criterio: str, valor: str) -> Lista[Contacto]:
+    def filtrar_contactos(self, criterio: str, valor: str) -> list[Contacto]:
         pass
 
     def exportar_contactos(self,nombre_archivo: str):

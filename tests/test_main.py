@@ -4,7 +4,7 @@ from src.model.contacto import Contacto
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError, NumeroInvalidoError, NombreCortoError, \
     CampoVacio, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroLargoError, NombreDeUnCaracter, TipoContactoInvalidoError, \
-    ErrorDatosNoNumericos
+    ErrorDatosNoNumericos, ErrorCriterioInexistente, ErrorNombreCaracterInvalido
 
 
 
@@ -194,6 +194,39 @@ def test_filtrar_contactos_por_tipo():
     ]
     assert resultado == esperado
 
+
+# Extremos
+
+def test_filtrar_lista_vacia():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = []
+    resultado = usuario.gestor.filtrar_contactos("nombre", "Carlos")
+    assert resultado == []
+
+
+# Errores
+def test_filtrar_criterio_inexistente():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "mateo lópez", "329050614"),
+        Contacto("profesional", "carlos manuel", "399888765"),
+        Contacto("profesional", "juan mecanico", "315665432"),
+    ]
+
+    with pytest.raises(ErrorCriterioInexistente):
+        usuario.gestor.filtrar_contactos("edad", "37")
+
+
+def test_filtrar_nombre_caracter_invalido():
+    usuario = Usuario("juan", "12345")
+    usuario.gestor.contactos = [
+        Contacto("personal", "mateo lópez", "329050614"),
+        Contacto("profesional", "carlos manuel", "399888765"),
+        Contacto("profesional", "juan mecanico", "315665432"),
+    ]
+
+    with pytest.raises(ErrorNombreCaracterInvalido):
+        usuario.gestor.filtrar_contactos("nombre", "C@rlos")
 
 
 
