@@ -3,7 +3,7 @@ from src.model.usuario import Usuario
 class GestorUsuarios:
 
     def __init__(self):
-        usuarios: list[Usuario]
+        self.usuarios: list[Usuario]
 
     def iniciar_sesion(self, nombre: str, contraseña: str) -> Usuario:
         pass
