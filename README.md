@@ -85,6 +85,41 @@ El sistema debe permitir al usuario crear un contacto.
 El sistema debe permitir al usuario editar la información de un
 contacto.
 
+## Caso de prueba normal 1: Editar el Tipo de Contacto.
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Samuel" | "300222398" |
+
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Profesional" | "Samuel" | "300222398" |
+
+
+## Caso de prueba normal 2: Editar el Nombre del Contacto.
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Samuel" | "300222398" |
+
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Juan" | "300222398" |
+
+
+## Caso de prueba normal 3: Editar el teléfono del contacto.
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Samuel" | "300222398" |
+
+| Tipo | Nombre | Teléfono |
+|------|--------|----------|
+| "Personal" | "Samuel" | "3005680588" |
+
+
+
+
+
+
+
 
 # 3. Filtrar un contacto por nombre y categoría:
 El sistema debe permitir al usuario filtrar la
