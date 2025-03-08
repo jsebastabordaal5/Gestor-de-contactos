@@ -1,4 +1,6 @@
-![image](https://github.com/user-attachments/assets/8fa9f15b-096e-41f3-ae8b-4964b2bee244)# GestorDeContactos
+![image](https://github.com/user-attachments/assets/8fa9f15b-096e-41f3-ae8b-4964b2bee244)
+
+# GestorDeContactos
 El objetivo de este proyecto es desarrollar una aplicación para la gestión de contactos personales y profesionales, permitiendo almacenar, organizar y manipular información de manera eficiente
 
 
