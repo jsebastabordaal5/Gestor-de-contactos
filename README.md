@@ -1,5 +1,7 @@
-# GestorDeContactos
+![image](https://github.com/user-attachments/assets/8fa9f15b-096e-41f3-ae8b-4964b2bee244)# GestorDeContactos
 El objetivo de este proyecto es desarrollar una aplicación para la gestión de contactos personales y profesionales, permitiendo almacenar, organizar y manipular información de manera eficiente
+
+
 
 # Requisitos:
 
@@ -241,9 +243,7 @@ lista de contactos por nombre y categoría.
 | Tipo | Nombre | Teléfono|
 |------|--------|---------|
 | "personal" | "Carlos Pérez" | "555123456" |
-|------|--------|---------|
 | "profesional" | "Ana López" | "555654321" |
-|------|--------|---------|
 | "personal" | "Carlos Gómez" | "555987654" |
 |------|--------|---------|
 
@@ -252,9 +252,18 @@ lista de contactos por nombre y categoría.
 |------|--------|
 
 | "personal" | "Carlos Pérez" | "555123456" |
-|------|--------|---------|
 | "personal" | "Carlos Gómez" | "555987654" |
 |------|--------|---------|
+
+
+## Caso de prueba Normal 2: Filtrar contactos por teléfono:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "Carlos Pérez" | "555123456" |
+| "profesional" | "Ana López" | "555654321" |
+| "profesional" | "Carlos Gómez" | "555987654" |
+|------|--------|---------|
+
 
 
 
