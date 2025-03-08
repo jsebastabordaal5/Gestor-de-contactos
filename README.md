@@ -76,8 +76,6 @@ El sistema debe permitir al usuario crear un contacto.
 
 
 
-
-
 # 2. Editar un contacto:
 El sistema debe permitir al usuario editar la informacion de un contacto
 
@@ -237,6 +235,27 @@ Resultado:
 # 3. Filtrar un contacto por nombre y categoría:
 El sistema debe permitir al usuario filtrar la
 lista de contactos por nombre y categoría.
+
+
+## Caso de prueba Normal 1: Filtrar contactos por nombre:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "Carlos Pérez" | "555123456" |
+|------|--------|---------|
+| "profesional" | "Ana López" | "555654321" |
+|------|--------|---------|
+| "personal" | "Carlos Gómez" | "555987654" |
+|------|--------|---------|
+
+
+| Nombre: | Carlos |
+|------|--------|
+
+| "personal" | "Carlos Pérez" | "555123456" |
+|------|--------|---------|
+| "personal" | "Carlos Gómez" | "555987654" |
+|------|--------|---------|
+
 
 
 # 4. Exportar e importar los contactos en formato vcards (.vcf): 
