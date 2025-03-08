@@ -78,41 +78,154 @@ El sistema debe permitir al usuario crear un contacto.
 
 
 
-
-
-
 # 2. Editar un contacto:
-El sistema debe permitir al usuario editar la información de un
-contacto.
+El sistema debe permitir al usuario editar la informacion de un contacto
 
-## Caso de prueba normal 1: Editar el Tipo de Contacto.
-| Tipo | Nombre | Teléfono |
-|------|--------|----------|
-| "Personal" | "Samuel" | "300222398" |
+## Caso de prueba 1: Caso normal-Editar tipo de contacto:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
 
-| Tipo | Nombre | Teléfono |
-|------|--------|----------|
-| "Profesional" | "Samuel" | "300222398" |
+Al editar: 
+|Valor a cambiar| Nuevo valor|
+|---------------|------------|
+| "tipo" | "profesional"| 
 
-
-## Caso de prueba normal 2: Editar el Nombre del Contacto.
-| Tipo | Nombre | Teléfono |
-|------|--------|----------|
-| "Personal" | "Samuel" | "300222398" |
-
-| Tipo | Nombre | Teléfono |
-|------|--------|----------|
-| "Personal" | "Juan" | "300222398" |
+Resultado:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "profesional" | "samuel" | "300222398" |
 
 
-## Caso de prueba normal 3: Editar el teléfono del contacto.
-| Tipo | Nombre | Teléfono |
-|------|--------|----------|
-| "Personal" | "Samuel" | "300222398" |
+## Caso de prueba 2: Caso normal- Editar nombre de contacto :
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
 
-| Tipo | Nombre | Teléfono |
-|------|--------|----------|
-| "Personal" | "Samuel" | "3005680588" |
+Al editar: 
+|Valor a cambiar| Nuevo valor|
+|---------------|------------|
+| "nombre" | "juan"| 
+
+Resultado:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "juan" | "300222398" |
+
+## Caso de prueba 3: Caso normal-Editar numero de contacto:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+Al editar: 
+|Valor a cambiar| Nuevo valor|
+|---------------|------------|
+| "telefono" | "3005680588"| 
+
+Resultado:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "3005680588" |
+
+## Caso de prueba 4: Caso Extremo-Editar contacto con nombre muy corto:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+Al editar: 
+|Valor a cambiar| Nuevo valor|
+|---------------|------------|
+| "nombre" | "a"| 
+
+Resultado:
+| Eror|
+|------|
+| "Error: El nombre es demasiado corto. Debe tener al menos 3 caracteres" |
+
+## Caso de prueba 5: Caso Extremo-Editar contacto con telefono muy largo:
+
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+Al editar: 
+|Valor a cambiar| Nuevo valor|
+|---------------|------------|
+| "telefono" | "1234567898765432123"| 
+
+Resultado:
+| Error|
+|------|
+| "Error: El número de teléfono debe tener exactamente 10 dígitos |
+
+
+## Caso de prueba 6: Caso Extremo-Editar contacto con telefono ivalido:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+Al editar: 
+|Valor a cambiar| Nuevo valor|
+|---------------|------------|
+| "telefono" | "1"| 
+
+Resultado:
+| Error|
+|------|
+| "Error: El número de teléfono debe tener exactamente 10 dígitos |
+
+
+## Caso de prueba 7: Caso Error-Editar contacto no existente:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+|      |       |        |
+
+Al editar:
+| Error|
+|------|
+| "Error: El contacto no fue encontrado"|
+
+
+## Caso de prueba 8: Caso Error-Editar contacto sin valores:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+Al editar: 
+| nuevo tipo |nuevo Nombre | nuevo Teléfono|
+|------|--------|---------|
+|      |       |        |
+
+Resultado:
+| Error|
+|------|
+| "Error: Debe proporcionar al menos un dato para modificar el contacto|
+
+
+## Caso de prueba 9 : Caso Error-Editar contacto nombre vacio:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+Al editar: 
+| nuevo tipo |nuevo Nombre | nuevo Teléfono|
+|------|--------|---------|
+|      |    " "   |        |
+
+Resultado:
+| Error|
+|------|
+| "Error: El nombre no puede ser un campo vacio|
+
 
 
 
