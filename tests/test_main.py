@@ -606,7 +606,7 @@ def test_iniciar_sesion_con_contraseña_vacia():
     with pytest.raises(ContraseñaVaciaError):
         gestor.iniciar_sesion("carlos", "")
 
-def test_iniciar_sesion_con_usuario_vacio():
+def test_iniciar_sesion_con_nombre_vacio():
     gestor = GestorUsuarios()
     usuario = Usuario("juan", "12345")
     gestor.registrar_usuario(usuario)
