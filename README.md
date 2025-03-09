@@ -83,6 +83,7 @@ El sistema debe permitir al usuario crear un contacto.
 
 
 
+
 # 2. Editar un contacto:
 El sistema debe permitir al usuario editar la informacion de un contacto
 
@@ -241,13 +242,6 @@ lista de contactos por nombre y categoría.
 
 
 ## Caso de prueba Normal 1: Filtrar contactos por nombre:
-| Tipo | Nombre | Teléfono|
-|------|--------|---------|
-| "personal" | "Carlos Pérez" | "555123456" |
-| "profesional" | "Ana López" | "555654321" |
-| "personal" | "Carlos Gómez" | "555987654" |
-
-
 
 | Nombre: | Carlos |
 |------|--------|
@@ -257,14 +251,8 @@ lista de contactos por nombre y categoría.
 |------|--------|---------|
 
 
-## Caso de prueba Normal 2: Filtrar contactos por teléfono:
-| Tipo | Nombre | Teléfono|
-|------|--------|---------|
-| "personal" | "Carlos Pérez" | "555123456" |
-| "profesional" | "Ana López" | "555654321" |
-| "profesional" | "Carlos Gómez" | "555987654" |
-|------|--------|---------|
 
+## Caso de prueba Normal 2: Filtrar contactos por teléfono:
 | Teléfono: | "555123456" |
 |------|--------|
 
@@ -274,7 +262,6 @@ lista de contactos por nombre y categoría.
 
 
 ## Caso de prueba normal 3: Filtrar contactos por tipo:
-
 | Tipo: | "profesional" |
 |------|--------|
 
@@ -283,8 +270,8 @@ lista de contactos por nombre y categoría.
 |------|--------|---------|
 
 
-## Caso de uso Extremo 4: Filtrar contactos por parte del teléfono:
 
+## Caso de uso Extremo 4: Filtrar contactos por parte del teléfono:
 | Teléfono: | "56" |
 |------|--------|
 
@@ -306,13 +293,35 @@ lista de contactos por nombre y categoría.
 
 
 ## Caso de uso extremo #6: Filtrar contactos cuando son del mismo tipo:
-
 | Tipo: | "Profesional" |
 |------|--------|
 
  |"profesional" | "Carlos Gómez" | "555987654" |
  |"profesional" | "Mateo Acevedo" | "34566172" |
-  "profesional" | "Robert Jesus" | "889006755" |
+ |"profesional" | "Robert Jesus" | "889006755" |
+
+
+ ## Caso de uso Error #7: Filtrar por criterio inexistente:
+| Edad: | 29 |
+|------|--------|
+
+| Error! Criterio inexistente! |
+
+
+ ## Caso de uso Error #8: Filtrar nombre con caracter inválido:
+| Edad: | C@rlos|
+|------|--------|
+
+| Error! Nombre con caracteres incorrectos |
+
+
+
+ ## Caso de uso Error #9: Filtrar teléfono con digitos inválidos:
+| Teléfono: | "abc 123 cde"|
+|------|--------|
+
+| Error! Teléfono con dígitos incorrectos |
+
 
 
 
@@ -320,6 +329,7 @@ lista de contactos por nombre y categoría.
 El sistema debe permitir al
 usuario exportar los contactos a un archivo .vcf e importarlos al sistema desde un
 archivo .vcf.
+
 
 ## Caso de prueba 1: Caso normal-Exportar contacto:
 Contacto:
