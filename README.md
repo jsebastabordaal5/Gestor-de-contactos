@@ -264,7 +264,7 @@ lista de contactos por nombre y categoría.
 ## Caso de prueba normal 3: Filtrar contactos por tipo:
 | Tipo: | "profesional" |
 |------|--------|
-|------|--------|---------|
+
 | "profesional" | "Ana López" | "555654321" |
 | "profesional" | "Carlos Gómez" | "555987654" |
 |------|--------|---------|
