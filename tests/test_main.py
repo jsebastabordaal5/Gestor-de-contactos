@@ -334,7 +334,7 @@ def test_exportar_multiples_contactos():
     usuario = Usuario("juan", "12345")
     contacto1 = Contacto("personal", "samuel", "300222398")
     usuario.gestor.registrar_contacto(contacto1)
-    contacto2 = Contacto("personal", "samuel", "300222398")
+    contacto2 = Contacto("personal", "ana", "3104567890")
     usuario.gestor.registrar_contacto(contacto2)
 
     usuario.gestor.exportar_contactos("contactos.vcf")
@@ -362,7 +362,7 @@ END:VCARD"""
 def test_exportar_contacto_nombre_largo():
     usuario = Usuario("juan", "12345")
     nombre_largo = "a" * 200
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", nombre_largo, "300222398")
     usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.exportar_contactos("contactos.vcf")
 
@@ -379,7 +379,7 @@ def test_importar_contacto_archivo_vacio():
     usuario = Usuario("juan", "12345")
     usuario.gestor.importar_contactos("contactos_vacio.vcf")
 
-    assert len(usuario.gestor.contactos) == 1
+    assert len(usuario.gestor.contactos) == 0
 
 
 def test_exportar_importar_contacto_caracteres_especiales():
