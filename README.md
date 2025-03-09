@@ -235,10 +235,6 @@ Resultado:
 
 
 
-
-
-
-
 # 3. Filtrar un contacto por nombre y categoría:
 El sistema debe permitir al usuario filtrar la
 lista de contactos por nombre y categoría.
@@ -250,7 +246,7 @@ lista de contactos por nombre y categoría.
 | "personal" | "Carlos Pérez" | "555123456" |
 | "profesional" | "Ana López" | "555654321" |
 | "personal" | "Carlos Gómez" | "555987654" |
-|------|--------|---------|
+
 
 
 | Nombre: | Carlos |
@@ -269,6 +265,54 @@ lista de contactos por nombre y categoría.
 | "profesional" | "Carlos Gómez" | "555987654" |
 |------|--------|---------|
 
+| Teléfono: | "555123456" |
+|------|--------|
+
+| "personal" | "Carlos Pérez" | "555123456" |
+|------|--------|---------|
+
+
+
+## Caso de prueba normal 3: Filtrar contactos por tipo:
+
+| Tipo: | "profesional" |
+|------|--------|
+
+| "profesional" | "Ana López" | "555654321" |
+| "profesional" | "Carlos Gómez" | "555987654" |
+|------|--------|---------|
+
+
+## Caso de uso Extremo 4: Filtrar contactos por parte del teléfono:
+
+| Teléfono: | "56" |
+|------|--------|
+
+| "personal" | "Carlos Pérez" | "555123456" |
+| "profesional" | "Ana López" | "555654321" |
+|------|--------|---------|
+
+
+
+## Caso de uso extremo 5: Filtrar contactos por parte del nombre:
+
+| Nombre: | "Car" |
+|------|--------|
+
+| "personal" | "Carlos Pérez" | "555123456" |
+| "profesional" | "Carlos Gómez" | "555987654" |
+|------|--------|---------|
+
+
+
+## Caso de uso extremo #6: Filtrar contactos cuando son del mismo tipo:
+
+| Tipo: | "Profesional" |
+|------|--------|
+
+ |"profesional" | "Carlos Gómez" | "555987654" |
+ |"profesional" | "Mateo Acevedo" | "34566172" |
+  "profesional" | "Robert Jesus" | "889006755" |
 
 
 
