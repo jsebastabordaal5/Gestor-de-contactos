@@ -277,9 +277,277 @@ El sistema debe permitir al
 usuario exportar los contactos a un archivo .vcf e importarlos al sistema desde un
 archivo .vcf.
 
+## Caso de prueba 1: Caso normal-Exportar contacto:
+Contacto:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+
+Se ejecuta la función exportar_contactos
+
+Resultado:
+| Archivo generado .vcf|
+|------|
+| BEGIN:VCARD
+FN:samuel
+TEL:300222398
+CATEGORIES:personal
+END:VCARD|
+
+## Caso de prueba 2: Caso normal-Importar contacto:
+| Contenido del archivo|
+|------|
+| BEGIN:VCARD
+FN:samuel
+TEL:300222398
+CATEGORIES:personal
+END:VCARD|
+
+
+Se ejecuta la función importar_contactos
+
+Contactos del usuario:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+
+
+
+
+
+## Caso de prueba 3: Caso normal-exportar multiples contactos:
+
+Contactos:
+| Tipo | Nombre | Teléfono|
+|------|--------|---------|
+| "personal" | "samuel" | "300222398" |
+| "profesional" | "ana" | "3104567890" |
+
+Se ejecuta la función exportar_contactos
+
+Resultado:
+| Archivo generado .vcf|
+|------|
+| BEGIN:VCARD
+FN:samuel
+TEL:300222398
+CATEGORIES:personal
+END:VCARD|
+| BEGIN:VCARD
+FN:ana
+TEL:3104567890
+CATEGORIES:profesional
+END:VCARD|
+
+
+
+## Caso de prueba 4: Caso Extremo-exporta contacto nombre largo:
+| Tipo     | Nombre (200 caracteres) | Teléfono   |  
+|----------|-------------------------|------------|  
+| personal | aaaaaaaaaa...(200 "a")  | 300222398  |  
+
+Se ejecuta la función exportar_contactos
+
+| Archivo generado .vcf |  
+|----------------------|  
+| BEGIN:VCARD  
+FN:aaaaaaaaaaaaaaaaaaaaaaaa... (200 caracteres "a")  
+TEL:300222398  
+CATEGORIES:personal  
+END:VCARD |  
+
+
+## Caso de prueba 5: Caso Extremo-exporta contacto nombre largo:
+
+Archivo de Entrada (`contactos_vacio.vcf`):  
+*(Archivo vacío, sin contenido)*  
+
+Se ejecuta la función importar_contactos intentando importar contactos desde un archivo vacío.  
+
+Resultado Esperado:  
+
+| Contactos Importados |  
+|----------------------|  
+| Ninguno (lista vacía) | 
+
+
+## Caso de prueba 6: Caso Extremo-Exportar e importar contacto con caracteres especiales:
+
+Contacto:
+
+| Tipo     | Nombre             | Teléfono         |  
+|----------|--------------------|-----------------|  
+| personal | José López 🎉✨     | +57-300-555-6666 |  
+
+
+1. Se ejecuta exportar_contactos
+2. Se importa el archivo con importar_contacto
+
+| Archivo generado .vcf |  
+|----------------------|  
+| BEGIN:VCARD  
+FN:José López 🎉✨  
+TEL:+57-300-555-6666  
+CATEGORIES:personal  
+END:VCARD |  
+
+
+
+## Caso de prueba 7: Caso Error-Exportar contactos cuando no hay contactos registrados  :
+
+contactos :
+| Tipo | Nombre | Teléfono |  
+|------|--------|---------|  
+|  |    |    |   
+
+
+Se ejecuta `exportar_contactos cuando no hay contactos registrados.
+
+| Error Lanzado |  
+|--------------|  
+| Error: No hay contactos para exportar. |  
+
+## Caso de prueba 8: Caso Error-importar desde un archivo inexistente  :
+
+| Nombre del Archivo | Estado |  
+|--------------------|--------|  
+| archivo_inexistente.vcf | *(No existe)* |  
+
+Se ejecuta importar_contactos
+
+Resultado:
+| Error Lanzado |  
+|--------------|  
+| Error: El archivo  no existe. Verifique la ruta y el nombre del archivo | 
+
+## Caso de prueba 9: Caso Error-importar archivo con formato invalido  :
+| Contenido del Archivo |  
+|----------------------|  
+| CONTACTO: samuel, 300222398 |  
+
+Se ejecuta importar_contactos  
+
+### Resultado :  
+
+| Error Lanzado |  
+|--------------|  
+| Error : El archivo no tiene un formato VCF válido. Verifique el contenido y la estructura |
+
 
 # 5. Crear un usuario:
 El sistema debe permitir al usuario darse de alta.
+
+## Caso de prueba 1: Caso Normal-Registrar usuario:
+Usuario:
+
+| Nombre de Usuario | Contraseña |  
+|------------------|------------|  
+| "juan" | "password123" |    
+
+
+| Validación | Resultado Esperado |  
+|------------|--------------------|  
+|Cantidad de usuarios en lista | 1 usuario en lista |  
+
+## Caso de prueba 2: Caso Normal-Registrar multiples usuarios:
+Usuarios:
+
+| Nombre de Usuario | Contraseña |  
+|------------------|------------|  
+| "juan" | "password123" |  
+| "maria" | "password321" | 
+
+| Validación | Resultado Esperado |  
+|------------|--------------------|  
+|Cantidad de usuarios en lista | 2 usuario en lista | 
+
+
+## Caso de prueba 3: Caso Normal-Registrar usuarios similares:
+
+| Nombre de Usuario | Contraseña |  
+|------------------|------------|  
+| "juan1" | "password123" |  
+| "juan" | "password12" |
+
+| Validación | Resultado Esperado |  
+|------------|--------------------|  
+|Cantidad de usuarios en lista | 2 usuario en lista | 
+
+## Caso de prueba 4: Caso Extremo-Registrar usuario nombre y contraseña largos:
+Usuario:
+
+| Nombre de Usuario | Contraseña |  
+|------------------|------------|  
+| "juan" | "password123" |  
+| "juan" | "otraClave456" |
+
+| Validación | Resultado Esperado |  
+|------------|--------------------|  
+|Cantidad de usuarios en lista | 1 usuario en lista | 
+
+## Caso de prueba 5: Caso Extremo-Registrar usuario con caracteres especiales:
+Usuario:
+
+| Nombre de Usuario   | Contraseña    |  
+|--------------------|--------------|  
+| "J@hn_Doe 123"    | "P@ssw0rd!"  |  
+
+| Validación | Resultado Esperado |  
+|------------|--------------------|  
+|Cantidad de usuarios en lista | 1 usuario en lista | 
+
+
+## Caso de prueba 6: Caso Extremo-Registrar usuario con espacios en los campos:
+| Nombre de Usuario            | Contraseña                   |  
+|-----------------------------|-----------------------------|  
+| "   usuario con espacios   "  | "   contraseña con espacios   "  | 
+
+Resultado:
+
+| Nombre de Usuario            | Contraseña                   |  
+|-----------------------------|-----------------------------|  
+| "usuario con espacios"  | "contraseña con espacios"  | 
+
+
+## Caso de prueba 7: Caso Error-Registrar usuario nulo:
+
+ Datos de entrada  :
+
+| Usuario |  
+|---------|  
+| `None`  |  
+
+
+| Error |  
+|-------|  
+| Error: No se puede registrar un usuario nulo. Verifique los datos de entrada |  
+
+## Caso de prueba 8: Caso Error-Registrar usuario ya registrado:
+
+| Nombre            | Contraseña        |  
+|------------------|------------------|  
+| usuarioRepetido | contraseña123     |  
+| usuarioRepetido | otracontraseña   |  
+
+Resultado :
+
+| Error |  
+|-------|  
+| Error: El usuario ya está registrado. Elija un nombre diferente |  
+
+
+## Caso de prueba 9: Caso Error-Intentar registrar un usuario de tipo invalido:
+
+| Tipo de dato proporcionado | Valor |  
+|--------------------------|--------------------------------------------|  
+| `str`                   | `"Este es un string, no un objeto Usuario"` |  
+
+Resultado:
+
+| Error |  
+|-------|  
+| Error: Debes proporcionar un objeto de tipo Usuario |
 
 
 # 6. Iniciar sesión:
