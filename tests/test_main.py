@@ -5,7 +5,7 @@ from src.model.gestor_usuarios import GestorUsuarios
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError,  NombreCortoError, \
     NombreVacioError, DatosNoNumericosError, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroInvalidoError,  TipoContactoError, \
-    ErrorCriterioInexistente,  ErrorUsuarioExistente, ErrorUsuarioInexistente, ErrorUsuarioNulo, ContraseñaVaciaError, ErrorNombreCaracterInvalido
+    ErrorCriterioInexistente,  ErrorUsuarioExistente, ErrorUsuarioInexistente, ErrorTipoInvalidoUsuario, ContraseñaVaciaError, ErrorNombreCaracterInvalido
 
 
 
@@ -16,7 +16,7 @@ import pytest
 #Normales
 def test_crear_contacto_1():
     usuario = Usuario("juan", "12345")
-    contacto= Contacto("personal", "juan sebastian", "3226130937")
+    contacto = Contacto("personal", "juan sebastian", "3226130937")
     usuario.gestor.registrar_contacto(contacto)
     assert len(usuario.gestor.contactos) == 1
 
@@ -451,10 +451,10 @@ def test_registrar_multiples_usuarios():
     assert usuario1 in gestor.usuarios
     assert usuario2 in gestor.usuarios
 
-def test_registrar_usuario_nombre_duplicado():
+def test_registrar_usuarios_similares():
     gestor = GestorUsuarios()
-    usuario1 = Usuario("juan", "password123")
-    usuario2 = Usuario("juan", "otraClave456")
+    usuario1 = Usuario("juan1", "password123")
+    usuario2 = Usuario("juan", "password123")
 
     gestor.registrar_usuario(usuario1)
     gestor.registrar_usuario(usuario2)
@@ -506,10 +506,10 @@ def test_registrar_usuario_con_espacios_limpiados():
 
 def test_registrar_usuario_nulo():
     gestor = GestorUsuarios()
-    usuario_nulo = None
+    usuario_incorrecto = "Éste es un string, no un Objeto Usuario"
 
-    with pytest.raises(ErrorUsuarioNulo):
-        gestor.registrar_usuario(usuario_nulo)
+    with pytest.raises(ErrorTipoInvalidoUsuario):
+        gestor.registrar_usuario(usuario_incorrecto)
 
 
 def test_registrar_usuario_duplicado():

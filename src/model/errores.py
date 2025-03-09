@@ -120,6 +120,12 @@ class ErrorCriterioInexistente(Exception):
         super().__init__(f"El criterio: {criterio} es inexistente")
 
 
+class ErrorTipoInvalidoUsuario(Exception):
+    #se lanza cuando se quiere registrar algo que no sea de tipo Usuario
+    def _init_(self, mensaje= "Debes proporcionar un objeto de tipo Usuario"):
+        super()._init_(mensaje)
+
+
 
 
 
