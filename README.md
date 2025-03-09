@@ -286,6 +286,7 @@ lista de contactos por nombre y categoría.
 | Nombre: | "Car" |
 |------|--------|
 
+
 | "personal" | "Carlos Pérez" | "555123456" |
 | "profesional" | "Carlos Gómez" | "555987654" |
 |------|--------|---------|
@@ -607,3 +608,91 @@ Resultado:
 # 6. Iniciar sesión:
 El sistema debe permitir al usuario iniciar sesión para ver la lista de sus
 contactos.
+
+
+## Caso de Prueba normal #1: credenciales correctas:
+| Nombre | Contraseña |
+|------|----------|
+| "juan" | "12345" | Ingreso exitoso |
+
+
+## Caso de Prueba normal #2: iniciar sesión luego de registrarse:
+| Nombre | Contraseña |
+|------|----------|
+| "juan" | "12345" | Registro exitoso |
+
+| Sesión iniciada|
+
+
+## Caso de Prueba normal #3: iniciar sesión después de cerrar sesión:
+
+Sesión cerrada!
+
+| Nombre | Contraseña |
+|------|----------|
+| "juan" | "12345" | Ingreso exitoso |
+
+
+
+## Caso de Prueba extrema #4: Credenciales extremadamente largas:
+| Nombre | Contraseña |
+|------|----------|
+| "juan garzón garzón villa sanchez" | "123456gsuyh2tn_@" |
+
+
+
+## Caso de Prueba extrema #5: Credenciales en mayusculas o minúsuclas:
+| Nombre | Contraseña |
+|------|----------|
+| "Juan" | "ClaveSegura123" |
+
+| Nombre | Contraseña |
+|------|----------|
+| "juan" | "clavesegura123" |
+
+
+
+## Caso de Prueba extrema #6: iniciar sesión en diferentes dispositivos:
+
+### Dispositivo 1:
+| "juan" | "12345" |
+
+
+### Dispositivo 2:
+| "juan" | "12345" |
+
+
+## Caso de Prueba error #7: usuario inexistente:
+| Nombre | Contraseña |
+|------|----------|
+| "usuario inexistente" | "clave123" | !Error,  Usuario inexistente ! |
+
+
+## Caso de Prueba error #8: contraseña vacía |
+| Nombre | Contraseña |
+|------|----------|
+| "juan" | " " | !Error,  Contraseña vacía |
+
+
+## Caso de Prueba error #9: nombre vacío |
+| Nombre | Contraseña |
+|------|----------|
+| "" | " 12345 " | !Error,  nombre vacío |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
