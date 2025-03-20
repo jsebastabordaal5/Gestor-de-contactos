@@ -8,8 +8,10 @@ class GestorContactos:
     def ver_contactos(self):
         pass
 
-    def registrar_contacto(self,contacto:Contacto):
-        pass
+    def registrar_contacto(self, contacto:Contacto):
+        if contacto not in self.contactos:
+            self.contactos.append(contacto)
+            print(f"Contacto: {contacto.nombre} fue")
 
 
 
