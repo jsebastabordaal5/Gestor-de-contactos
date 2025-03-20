@@ -1,5 +1,6 @@
 from src.model.contacto import Contacto
-from src.model.errores import ErrorCriterioInexistente, ErrorLimiteDigitosTelefono
+from src.model.errores import ErrorCriterioInexistente, ErrorLimiteDigitosTelefono, TipoContactoError
+
 
 class GestorContactos:
     def __init__(self):
@@ -15,11 +16,11 @@ class GestorContactos:
                 if contacto.tipo == "profesional" or contacto.tipo == "personal":
                     self.contactos.append(contacto)
                     return contacto
+                else:
+                    raise TipoContactoError(f"El tipo: {contacto.tipo} es inválido")
 
 
 
-
-        self.contactos.append(contacto)
 
 
 
