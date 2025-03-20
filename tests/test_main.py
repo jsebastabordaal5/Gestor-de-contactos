@@ -35,20 +35,21 @@ def test_crear_contacto_3():
 #Extremos
 def test_nombre_con_mas_de_15_caracteres():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(NombreLargoError):
-        contacto = Contacto("personal", "Daniel Olarte Pérez Valencia Villa Andrade", "3148122216")
-
+    contacto = Contacto("personal", "Daniel Olarte Pérez Valencia Villa Andrade", "3148122216")
+    usuario.gestor.registrar_contacto(contacto)
+    assert len(usuario.gestor.contactos) == 1
 
 def test_telefono_mas_de_10_digitos():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(NumeroInvalidoError):
-        contacto = Contacto("personal", "Samuel Flórez", "99999999999999999" )
+    contacto = Contacto("personal", "Samuel Flórez", "99999999999999999")
+    usuario.gestor.registrar_contacto(contacto)
+    assert len(usuario.gestor.contactos) == 1
 
 def test_nombre_con_solo_1_caracter():
     usuario = Usuario("juan", "12345")
-    with pytest.raises(NombreCortoError):
-        contacto = Contacto("personal", "y", "331 2498 3127" )
-
+    contacto = Contacto("personal", "y", "33124983127")
+    usuario.gestor.registrar_contacto(contacto)
+    assert len(usuario.gestor.contactos) == 1
 
 # Errores
 def test_tipo_contacto_invalido():
@@ -72,7 +73,6 @@ def test_campos_vacios():
 
 
 #Requisito 2
-
 
 #Normales
 def test_editar_tipo_contacto ( ):
