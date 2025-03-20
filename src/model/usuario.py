@@ -6,9 +6,9 @@ class Usuario:
         self.contraseña = contraseña
         self.gestor= GestorContactos()
 
-
-    def registrar_contacto(self) -> Contacto:
-        pass
+    def registrar_contacto(self, tipo: int, nombre: str, telefono: str) -> Contacto:
+        contacto = Contacto(tipo, nombre, telefono)
+        self.gestor.registrar_contacto(contacto)
 
     def ver_contactos(self) -> Contacto:
         pass
