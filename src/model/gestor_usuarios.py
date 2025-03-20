@@ -8,7 +8,7 @@ class GestorUsuarios:
     def iniciar_sesion(self, nombre: str, contraseña: str) -> Usuario:
         pass
 
-    def cerrar_sesion(self):
+    def cerrar_sesion(self) -> None:
         pass
 
     def registrar_usuario(self, Usuario: str) -> Usuario:
