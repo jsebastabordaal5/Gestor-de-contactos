@@ -11,7 +11,9 @@ class GestorContactos:
     def registrar_contacto(self, contacto:Contacto):
         if contacto not in self.contactos:
             self.contactos.append(contacto)
-            print(f"Contacto: {contacto.nombre} fue")
+            print(f"Contacto: {contacto.nombre} fue agregado exitosamente!")
+        else:
+            print(f"El contacto {contacto.nombre} ya es existente!")
 
 
 
