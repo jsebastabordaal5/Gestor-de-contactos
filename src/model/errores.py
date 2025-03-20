@@ -66,6 +66,9 @@ class ErrorUsuarioInexistente(Exception):
         super().__init__(f"Usuario Inexistente")
 
 
+class ErrorLimiteCaracteres(Exception):
+    def __init__(self):
+        super().__init__(f"El nombre no puede superar los 30 dígitos")
 
 
 
@@ -124,6 +127,12 @@ class ErrorTipoInvalidoUsuario(Exception):
     #se lanza cuando se quiere registrar algo que no sea de tipo Usuario
     def _init_(self, mensaje= "Debes proporcionar un objeto de tipo Usuario"):
         super()._init_(mensaje)
+
+
+class ErrorLimiteDigitosTelefono(Exception):
+    def __init__(self, telefono):
+        super().__init__(f"El telefono: {telefono} excede los 12 caracteres")
+
 
 
 

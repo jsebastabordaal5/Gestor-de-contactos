@@ -1,5 +1,5 @@
 from src.model.contacto import Contacto
-from src.model.errores import ErrorCriterioInexistente
+from src.model.errores import ErrorCriterioInexistente, ErrorLimiteDigitosTelefono
 
 class GestorContactos:
     def __init__(self):
@@ -10,11 +10,16 @@ class GestorContactos:
         pass
 
     def registrar_contacto(self, contacto:Contacto):
-        if contacto not in self.contactos:
-            self.contactos.append(contacto)
-            print(f"Contacto: {contacto.nombre} fue agregado exitosamente!")
-        else:
-            print(f"El contacto {contacto.nombre} ya es existente!")
+        if len(contacto.nombre) < 30 and len(contacto.nombre) > 0 :
+            if len(contacto.telefono) >= 10 and len(contacto.telefono) <= 12:
+                if contacto.tipo == "profesional" or contacto.tipo == "personal":
+                    self.contactos.append(contacto)
+                    return contacto
+
+
+
+
+        self.contactos.append(contacto)
 
 
 
