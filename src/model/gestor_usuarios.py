@@ -1,4 +1,5 @@
-from src.model.usuario import Usuario
+from src.model.usuario import Usuario, u
+from src.model.errores import
 
 class GestorUsuarios:
 
@@ -6,7 +7,10 @@ class GestorUsuarios:
         self.usuarios: list[Usuario] = []
 
     def iniciar_sesion(self, nombre: str, contraseña: str) -> Usuario:
-        pass
+        usuario = Usuario(nombre, nombre, contraseña)
+        if usuario.nombre
+
+
 
     def cerrar_sesion(self) -> None:
         pass
