@@ -1,5 +1,5 @@
 from src.model.contacto import Contacto
-from src.model.errores import ErrorCriterioInexistente, ErrorLimiteDigitosTelefono, TipoContactoError
+from src.model.errores import  TipoContactoError, NumeroInvalidoError, NombreInvalidoError
 
 
 class GestorContactos:
@@ -18,6 +18,10 @@ class GestorContactos:
                     return contacto
                 else:
                     raise TipoContactoError(f"El tipo: {contacto.tipo} es inválido")
+            else:
+                raise NumeroInvalidoError(f"El número ingresado NO es válido")
+        else:
+            raise NombreInvalidoError
 
 
 
@@ -31,14 +35,29 @@ class GestorContactos:
         pass
 
     def filtrar_contactos(self, criterio: str, valor: str) -> list[Contacto]:
-        if criterio not in ["tipo", "nombre", "teléfono"]:
-            raise ErrorCriterioInexistente(f"El criterio {criterio} es inexistente")
-
         contactos_filtrados = []
         for contacto in self.contactos:
-            if str(getattr(contacto, criterio)) == valor:
+            if criterio == 'tipo' and contacto.tipo == valor:
                 contactos_filtrados.append(contacto)
+            else:
+                raise TipoContactoError(f"El tipo: {contacto.tipo} es inválido")
+
+            if criterio == 'nombre' and contacto.nombre == valor:
+                contactos_filtrados.append(contacto)
+            else:
+                raise NombreInvalidoError(f"El nombre {contacto.nombre} no se encuentra")
+
+            if criterio == 'teléfono' and contacto.telefono == valor:
+                contactos_filtrados.append(contacto)
+            else:
+                raise NumeroInvalidoError(f"El número {contacto.telefono} es inexistente")
+
         return contactos_filtrados
+
+
+
+
+
 
     def exportar_contactos(self,nombre_archivo: str):
         pass

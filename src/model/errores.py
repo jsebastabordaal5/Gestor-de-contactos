@@ -14,6 +14,11 @@ class NumeroInvalidoError(Exception):
     def __init__(self, mensaje="El número de teléfono debe tener exactamente 10 dígitos"):
         super().__init__(mensaje)
 
+class NombreInvalidoError(Exception):
+
+    def __init__(self, mensaje="El nombre de contacto es inválido"):
+        super().__init__(mensaje)
+
 
 class NombreVacioError(Exception):
     # Se lanza cuando el campo de nuevo nombre está vacío
