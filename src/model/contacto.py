@@ -7,9 +7,12 @@ class Contacto:
 
 
     def __eq__(self, other):
-        if isinstance(other, Contacto):
-            return self.nombre == other.nombre and self.telefono == other.telefono and self.tipo == other.tipo
-        return False
+        return (
+                isinstance(other, Contacto) and
+                self.tipo == other.tipo and
+                self.nombre == other.nombre and
+                self.telefono == other.telefono
+        )
 
 
     def __hash__(self):

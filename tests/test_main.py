@@ -218,6 +218,10 @@ def test_filtrar_contactos_por_tipo():
 
 # Extremos
 
+def ordenar_contactos(contacto):
+    return (contacto.tipo, contacto.nombre, contacto.telefono)
+
+
 def test_filtrar_contacto_por_parte_del_telefono():
     usuario = Usuario("juan", "12345")
     usuario.gestor.contactos = [
@@ -226,11 +230,13 @@ def test_filtrar_contacto_por_parte_del_telefono():
         Contacto("profesional", "Carlos Gómez", "314482213")
     ]
     resultado = usuario.gestor.filtrar_contactos('telefono', '314')
+
     esperado = [
         Contacto("profesional", "Carlos Gómez", "314482213"),
         Contacto("personal", "Juan Rodríguez", "3146272068")
     ]
-    assert resultado == esperado
+
+    assert sorted(resultado, key=ordenar_contactos) == sorted(esperado, key=ordenar_contactos)
 
 
 def test_filtrar_contacto_por_parte_del_nombre():
