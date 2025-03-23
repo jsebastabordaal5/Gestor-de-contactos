@@ -77,21 +77,21 @@ def test_campos_vacios():
 #Normales
 def test_editar_tipo_contacto ( ):
     usuario = Usuario("juan","12345")
-    contacto=Contacto("personal","samuel","300222398")
+    contacto=Contacto("personal","samuel","3002223984")
     usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.editar_contacto(contacto, nuevo_tipo="profesional")
     assert usuario.gestor.contactos[0].tipo == "profesional"
 
 def test_editar_nombre_contacto ( ):
     usuario = Usuario("juan","12345")
-    contacto=Contacto("personal","samuel","300222398")
+    contacto=Contacto("personal","samuel","3002223984")
     usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.editar_contacto(contacto, nuevo_nombre="juan")
     assert usuario.gestor.contactos[0].nombre == "juan"
 
 def test_editar_numero_contacto ( ):
     usuario = Usuario("juan","12345")
-    contacto=Contacto("personal","samuel","300222398")
+    contacto=Contacto("personal","samuel","3002223984")
     usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.editar_contacto(contacto,nuevo_telefono="3005680588")
     assert usuario.gestor.contactos[0].telefono == "3005680588"
@@ -100,7 +100,7 @@ def test_editar_numero_contacto ( ):
 #Extremos
 def test_editar_contacto_nombre_extremadamente_corto():
     usuario = Usuario("juan", "12345")
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NombreCortoError):
         usuario.gestor.editar_contacto(contacto, nuevo_nombre="a")
@@ -108,7 +108,7 @@ def test_editar_contacto_nombre_extremadamente_corto():
 def test_editar_contacto_numero_extremadamente_largo():
     usuario = Usuario("juan", "12345")
     numero_muy_largo = "1234567898765432123"
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NumeroInvalidoError):
         usuario.gestor.editar_contacto(contacto, nuevo_telefono=numero_muy_largo)
@@ -116,17 +116,17 @@ def test_editar_contacto_numero_extremadamente_largo():
 def test_editar_contacto_numero_invalido():
     usuario = Usuario("juan", "12345")
     numero_corto = "1"
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NumeroInvalidoError):
-        usuario.gestor.editar_contacto(contacto, numero_corto)
+        usuario.gestor.editar_contacto(contacto, nuevo_telefono=numero_corto)
 
 
 #Error
 
 def test_editar_contacto_no_existente():
     usuario = Usuario("juan", "12345")
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
 
     with pytest.raises(ContactoNoEncontradoError):
@@ -135,7 +135,7 @@ def test_editar_contacto_no_existente():
 
 def test_editar_contacto_sin_valores():
     usuario = Usuario("juan", "12345")
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
 
     with pytest.raises(DatosInsuficientesError):
@@ -144,11 +144,10 @@ def test_editar_contacto_sin_valores():
 
 def test_editar_contacto_nombre_vacio():
     usuario = Usuario("juan", "12345")
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
     with pytest.raises(NombreVacioError):
         usuario.gestor.editar_contacto(contacto, nuevo_nombre="")
-
 
 
 # Requisito 3

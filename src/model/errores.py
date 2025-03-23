@@ -11,7 +11,7 @@ class DatosInsuficientesError(Exception):
 
 class NumeroInvalidoError(Exception):
     # Se lanza cuando el número de teléfono tiene menos o más de 10 dígitos
-    def __init__(self, mensaje="El número de teléfono debe tener exactamente 10 dígitos"):
+    def __init__(self, mensaje="El número de teléfono debe tener entre 10 a 12 dígitos"):
         super().__init__(mensaje)
 
 class NombreInvalidoError(Exception):
@@ -36,6 +36,8 @@ class ContraseñaVaciaError(Exception):
         super().__init__(mensaje)
 
 
+
+
 class ErrorSinContactos(Exception):
     def __init__(self, mensaje="No hay contactos para exportar."):
         super().__init__(mensaje)
@@ -55,8 +57,8 @@ class ErrorFormatoArchivoInvalido(Exception):
 
 class ErrorUsuarioNulo(Exception):
     # se lanza cuando se trata de crear un usuario nulo
-    def __init__(self, mensaje = "No se puede registrar un usuario nulo. Verifique los datos de entrada."):
-        super().__init__(mensaje)
+    def __init__(self):
+        super().__init__("No se puede registrar un usuario nulo. Verifique los datos de entrada.")
 
 
 class ErrorUsuarioYaExistente(Exception):
@@ -81,23 +83,23 @@ class NombreLargoError(Exception):
 
 
 class NombreCortoError(Exception):
-    def __init__(self, nombre):
-        super().__init__(f"El nombre'{nombre}' es demasiado corto")
+    def __init__(self, mensaje="El nombre es demasiado corto. Debe tener al menos 3 caracteres."):
+        super().__init__(mensaje)
 
 
 class ErrorSinContactos(Exception):
-    def __init__(self):
-        super().__init__(f"No hay contactos para exportar")
-
+    def __init__(self, mensaje="No hay contactos para exportar."):
+        super().__init__(mensaje)
 
 class ErrorArchivoInexistente(Exception):
-    def __init__(self):
-        super().__init__(f"Formato archivo inexistente")
+     def __init__(self, archivo: str):
+        super().__init__(f"El archivo '{archivo}' no existe. Verifique la ruta y el nombre del archivo.")
 
 
 class ErrorFormatoArchivoInvalido(Exception):
-      def __init__(self):
-        super().__init__(f"Formato archivo inválido")
+    #Se lanza cuando el archivo tiene un formato diferente al .vcf
+       def __init__(self, archivo: str):
+        super().__init__(f"El archivo '{archivo}' no tiene un formato VCF válido. Verifique el contenido y la estructura.")
 
 class ErrorNombreCaracterInvalido(Exception):
     def __init__(self, nombre):
@@ -112,8 +114,8 @@ class ErrorUsuarioExistente(Exception):
 #  pass
 
 class TipoContactoError(Exception):
-    def __init__(self, mensaje = "El tipo de contacto es inválido" ):
-        super().__init__(mensaje)
+    def __init__(self, tipo):
+        super().__init__(f"El tipo de contacto: {tipo} es inválido")
 
 
 
@@ -127,7 +129,6 @@ class ErrorCriterioInexistente(Exception):
 
 
 class ErrorTipoInvalidoUsuario(Exception):
-    #se lanza cuando se quiere registrar algo que no sea de tipo Usuario
     def _init_(self, mensaje= "Debes proporcionar un objeto de tipo Usuario"):
         super()._init_(mensaje)
 
@@ -144,12 +145,5 @@ class ErrorUsuarioExistente(Exception):
 class ContraseñaIncorrectaError(Exception):
     def __init__(self):
         super().__init__(f"Contraseña Incorrecta")
-
-
-
-
-
-
-
 
 
