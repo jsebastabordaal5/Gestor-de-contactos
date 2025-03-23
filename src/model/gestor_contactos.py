@@ -1,8 +1,8 @@
-
+import re
 import os
 from src.model.contacto import Contacto
 from src.model.errores import (NombreCortoError , NombreVacioError , NumeroInvalidoError , ContactoNoEncontradoError
-                     , DatosInsuficientesError ,ErrorSinContactos, ErrorArchivoInexistente,ErrorFormatoArchivoInvalido,
+                     , DatosInsuficientesError , ErrorNombreCaracterInvalido, ErrorCriterioInexistente, ErrorSinContactos, ErrorArchivoInexistente,ErrorFormatoArchivoInvalido,
                      TipoContactoError, NumeroInvalidoError, NombreInvalidoError, DatosNoNumericosError, CampoVacioError
                     )
 
@@ -27,11 +27,13 @@ class GestorContactos:
         return lista_aux
 
     def registrar_contacto(self, contacto:Contacto):
+
+        if contacto.nombre.strip() == "" or contacto.tipo.strip() == "" or contacto.telefono.strip() == "":
+            raise CampoVacioError()
+
         if not contacto.telefono.isdigit():
             raise DatosNoNumericosError(contacto.telefono)
 
-        if contacto.telefono == "" or contacto.tipo == ""  or contacto.nombre == "":
-            raise CampoVacioError()
 
         if len(contacto.nombre) < 30 and len(contacto.nombre) > 0 :
             if len(contacto.telefono) >= 10 and len(contacto.telefono) <= 12:
@@ -40,7 +42,6 @@ class GestorContactos:
                     return contacto
                 else:
                     raise TipoContactoError(contacto.tipo)
-
             else:
                 raise NumeroInvalidoError()
         else:
@@ -144,21 +145,28 @@ class GestorContactos:
 
 
     def filtrar_contactos(self, criterio: str, valor: str) -> list[Contacto]:
+        criterios_validos = ["nombre", "telefono", "tipo"]
+        if criterio not in criterios_validos:
+            raise ErrorCriterioInexistente(
+                f"El criterio '{criterio}' no es válido. Debe ser 'nombre', 'telefono' o 'tipo'.")
+
+        # Validar caracteres en el nombre
+        if criterio == "nombre" and not re.match(r"^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$", valor):
+            raise ErrorNombreCaracterInvalido(f"El nombre '{valor}' contiene caracteres no permitidos.")
+
+        # Validar que el teléfono contenga solo dígitos
+        if criterio == "telefono" and not valor.isdigit():
+            raise DatosNoNumericosError(f"El teléfono '{valor}' contiene caracteres no numéricos.")
+
+        # Filtrar contactos
         contactos_filtrados = []
+
         for contacto in self.contactos:
-            if criterio == 'tipo' and contacto.tipo == valor:
+            if criterio == "tipo" and contacto.tipo.lower() == valor.lower():
                 contactos_filtrados.append(contacto)
-            else:
-                raise TipoContactoError(f"El tipo: {contacto.tipo} es inválido")
-
-            if criterio == 'nombre' and contacto.nombre == valor:
+            elif criterio == "nombre" and valor.lower() in contacto.nombre.lower():
                 contactos_filtrados.append(contacto)
-            else:
-                raise NombreInvalidoError(f"El nombre {contacto.nombre} no se encuentra")
-
-            if criterio == 'teléfono' and contacto.telefono == valor:
+            elif criterio == "telefono" and valor in contacto.telefono:  # Permite búsqueda parcial de teléfono
                 contactos_filtrados.append(contacto)
-            else:
-                raise NumeroInvalidoError(f"El número {contacto.telefono} es inexistente")
 
         return contactos_filtrados

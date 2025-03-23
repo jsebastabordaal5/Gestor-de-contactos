@@ -70,10 +70,16 @@ def test_campos_vacios():
     usuario = Usuario("juan", "12345")
     with pytest.raises(CampoVacioError):
         contacto1 = Contacto(" ", "juan gonzalez", "33124983127")
-        contacto2 = Contacto("profesional ", " ", "33124983127")
-        contacto3 = Contacto("profesional", "juan gonzalez", " ")
         usuario.gestor.registrar_contacto(contacto1)
+
+        # Test para tipo vacío
+    with pytest.raises(CampoVacioError):
+        contacto2 = Contacto("profesional", " ", "33124983127")
         usuario.gestor.registrar_contacto(contacto2)
+
+        # Test para teléfono vacío
+    with pytest.raises(CampoVacioError):
+        contacto3 = Contacto("profesional", "juan gonzalez", " ")
         usuario.gestor.registrar_contacto(contacto3)
 
 
