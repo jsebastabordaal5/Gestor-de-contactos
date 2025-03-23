@@ -143,9 +143,10 @@ class ErrorUsuarioExistente(Exception):
     def __init__(self):
         super().__init__(f"El usuario ya existe")
 
-class ErrorCredencialesIncorrectas(Exception):
+class ContraseñaIncorrectaError(Exception):
     def __init__(self):
-        super().__init__(f"Credenciales incorrectas")
+        super().__init__(f"Contraseña Incorrecta")
+
 
 
 

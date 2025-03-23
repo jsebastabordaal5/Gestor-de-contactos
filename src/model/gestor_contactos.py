@@ -14,7 +14,18 @@ class GestorContactos:
 
 
     def ver_contactos(self):
-        pass
+        if not self.contactos:
+            print("No hay contactos guardados.")
+            return
+
+        lista_aux = []
+
+        print("\nLista de Contactos:")
+
+        for i, contacto in enumerate(self.contactos, start=1):
+            print(f"{i}. {contacto.tipo} - {contacto.nombre} ({contacto.telefono})")
+
+        return lista_aux
 
     def registrar_contacto(self, contacto:Contacto):
         if len(contacto.nombre) < 30 and len(contacto.nombre) > 0 :

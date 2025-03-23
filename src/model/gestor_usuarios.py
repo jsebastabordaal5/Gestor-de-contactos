@@ -1,5 +1,5 @@
 from src.model.usuario import Usuario
-from src.model.errores import ErrorUsuarioExistente, ErrorCredencialesIncorrectas
+from src.model.errores import ErrorUsuarioExistente, ContraseñaIncorrectaError, NombreInvalidoError
 
 
 class GestorUsuarios:
@@ -18,11 +18,14 @@ class GestorUsuarios:
 
     def iniciar_sesion(self, nombre: str, contraseña: str) -> Usuario | None:
         for usuario in self.usuarios:
-            if usuario.nombre == nombre and usuario.contraseña == contraseña :
-                print("Sesión iniciada exitosamente")
-                return usuario
+            if usuario.nombre == nombre:
+                if usuario.contraseña == contraseña :
+                    print("Sesión iniciada exitosamente")
+                    return usuario
+                else:
+                    raise ContraseñaIncorrectaError()
             else:
-                raise ErrorCredencialesIncorrectas("Nombre o contraseña incorrectas")
+                raise NombreInvalidoError()
 
 
 

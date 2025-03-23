@@ -5,6 +5,13 @@ class Contacto:
         self.nombre = nombre
         self.telefono = telefono
 
-    def __str__(self):
-        return f"{self.tipo} ({self.nombre}) - {self.telefono}"
+
+    def __eq__(self, other):
+        if isinstance(other, Contacto):
+            return self.nombre == other.nombre and self.telefono == other.telefono and self.tipo == other.tipo
+        return False
+
+
+    def __hash__(self):
+        return hash((self.nombre, self.telefono, self.tipo))
 
