@@ -1,4 +1,7 @@
-from src.model import Contacto, Usuario, GestorContactos, GestorUsuarios
+from src.model.usuario import Usuario
+from src.model.gestor_contactos import GestorContactos
+from src.model.gestor_usuarios import GestorUsuarios
+from src.model.contacto import Contacto
 
 
 class Sistema:
