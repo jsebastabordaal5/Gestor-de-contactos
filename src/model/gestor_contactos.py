@@ -23,6 +23,7 @@ class GestorContactos:
 
         for i, contacto in enumerate(self.contactos, start=1):
             print(f"{i}. {contacto.tipo} - {contacto.nombre} ({contacto.telefono})")
+            lista_aux.append(contacto)
 
         return lista_aux
 
