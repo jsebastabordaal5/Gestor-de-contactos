@@ -2,7 +2,7 @@ from src.model.contacto import Contacto
 
 import os
 from contacto import Contacto
-from errores import (NombreCortoError , NombreVacioError , NumeroInvalidoError , ContactoNoEncontradoError
+from src.model.errores import (NombreCortoError , NombreVacioError , NumeroInvalidoError , ContactoNoEncontradoError
                      , DatosInsuficientesError ,ErrorSinContactos, ErrorArchivoInexistente,ErrorFormatoArchivoInvalido,
                      TipoContactoError, NumeroInvalidoError, NombreInvalidoError
                     )
