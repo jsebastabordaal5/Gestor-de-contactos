@@ -6,6 +6,9 @@ class Usuario:
         self.contraseña = contraseña
         self.gestor= GestorContactos()
 
+    def __str__(self):
+        return f"Nombre: {self.nombre}, Contraseña : {self.contraseña}"
+
     def registrar_contacto(self, tipo: str, nombre: str, telefono: str) -> Contacto:
         contacto = Contacto(tipo, nombre, telefono)
         self.gestor.registrar_contacto(contacto)
