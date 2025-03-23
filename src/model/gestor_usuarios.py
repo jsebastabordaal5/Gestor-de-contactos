@@ -1,5 +1,5 @@
 from src.model.usuario import Usuario
-from src.model.errores import ErrorUsuarioExistente, ContraseñaIncorrectaError, NombreInvalidoError
+from src.model.errores import ErrorUsuarioExistente, ContraseñaIncorrectaError, NombreInvalidoError, ErrorUsuarioNulo
 
 
 class GestorUsuarios:
@@ -9,17 +9,24 @@ class GestorUsuarios:
 
 
     def registrar_usuario(self, usuario: Usuario)-> None:
-        for u in self.usuarios:
-            if u.nombre == usuario.nombre:
-                raise ErrorUsuarioExistente("El usuario ya existe")
-            else:
-                self.usuarios.append(usuario)
+        if usuario == None:
+            raise ErrorUsuarioNulo()
+
+        if not isinstance(usuario, Usuario):
+            raise TypeError("El objeto debe ser una instancia de la clase Usuario")
+
+        for user in self.usuarios:
+            if user.nombre.strip().lower() == usuario.nombre.strip().lower():
+                raise ErrorUsuarioExistente(usuario.nombre)
+
+        self.usuarios.append(usuario)
+        return
 
 
     def iniciar_sesion(self, nombre: str, contraseña: str) -> Usuario | None:
         for usuario in self.usuarios:
             if usuario.nombre == nombre:
-                if usuario.contraseña == contraseña :
+                if usuario.contraseña == contraseña:
                     print("Sesión iniciada exitosamente")
                     return usuario
                 else:

@@ -36,8 +36,6 @@ class ContraseñaVaciaError(Exception):
         super().__init__(mensaje)
 
 
-
-
 class ErrorSinContactos(Exception):
     def __init__(self, mensaje="No hay contactos para exportar."):
         super().__init__(mensaje)
@@ -57,8 +55,8 @@ class ErrorFormatoArchivoInvalido(Exception):
 
 class ErrorUsuarioNulo(Exception):
     # se lanza cuando se trata de crear un usuario nulo
-    def __init__(self):
-        super().__init__("No se puede registrar un usuario nulo. Verifique los datos de entrada.")
+    def __init__(self, mensaje = "No se puede registrar un usuario nulo. Verifique los datos de entrada."):
+        super().__init__(mensaje)
 
 
 class ErrorUsuarioYaExistente(Exception):
@@ -114,8 +112,8 @@ class ErrorUsuarioExistente(Exception):
 #  pass
 
 class TipoContactoError(Exception):
-    def __init__(self, tipo):
-        super().__init__(f"El tipo de contacto: {tipo} es inválido")
+    def __init__(self, mensaje = "El tipo de contacto es inválido" ):
+        super().__init__(mensaje)
 
 
 

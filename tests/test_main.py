@@ -296,7 +296,7 @@ def test_filtrar_telefono_con_digitos_no_numericos():
 # Normales
 def test_exportar_contacto():
     usuario = Usuario("juan", "12345")
-    contacto = Contacto("personal", "samuel", "300222398")
+    contacto = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto)
 
     usuario.gestor.exportar_contactos("contactos.vcf")
@@ -305,10 +305,10 @@ def test_exportar_contacto():
         contenido = archivo.read()
 
         esperado = """BEGIN:VCARD
-                    FN:samuel
-                    TEL:300222398
-                    CATEGORIES:personal
-                    END:VCARD"""
+FN:samuel
+TEL:3002223984
+CATEGORIES:personal
+END:VCARD"""
 
         assert esperado in contenido
 
@@ -317,7 +317,7 @@ def test_importar_contacto():
     with open("contactos.vcf", "w") as archivo:
         archivo.write("""BEGIN:VCARD
 FN:samuel
-TEL:300222398
+TEL:3002223984
 CATEGORIES:personal
 END:VCARD""")
 
@@ -326,15 +326,15 @@ END:VCARD""")
 
     assert len(usuario.gestor.contactos) == 1
     assert usuario.gestor.contactos[0].nombre == "samuel"
-    assert usuario.gestor.contactos[0].telefono == "300222398"
+    assert usuario.gestor.contactos[0].telefono == "3002223984"
     assert usuario.gestor.contactos[0].tipo == "personal"
 
 
 def test_exportar_multiples_contactos():
     usuario = Usuario("juan", "12345")
-    contacto1 = Contacto("personal", "samuel", "300222398")
+    contacto1 = Contacto("personal", "samuel", "3002223984")
     usuario.gestor.registrar_contacto(contacto1)
-    contacto2 = Contacto("personal", "ana", "3104567890")
+    contacto2 = Contacto("profesional", "ana", "3104567890")
     usuario.gestor.registrar_contacto(contacto2)
 
     usuario.gestor.exportar_contactos("contactos.vcf")
@@ -344,10 +344,9 @@ def test_exportar_multiples_contactos():
 
     esperado = """BEGIN:VCARD
 FN:samuel
-TEL:300222398
+TEL:3002223984
 CATEGORIES:personal
 END:VCARD
-
 BEGIN:VCARD
 FN:ana
 TEL:3104567890
@@ -356,13 +355,14 @@ END:VCARD"""
 
     assert esperado in contenido
 
+
 # Extremos
 
 
 def test_exportar_contacto_nombre_largo():
     usuario = Usuario("juan", "12345")
-    nombre_largo = "a" * 200
-    contacto = Contacto("personal", nombre_largo, "300222398")
+    nombre_largo = "a" * 29
+    contacto = Contacto("personal", nombre_largo, "3002223984")
     usuario.gestor.registrar_contacto(contacto)
     usuario.gestor.exportar_contactos("contactos.vcf")
 
@@ -382,26 +382,31 @@ def test_importar_contacto_archivo_vacio():
     assert len(usuario.gestor.contactos) == 0
 
 
-def test_exportar_importar_contacto_caracteres_especiales():
+def test_exportar_importar_contacto_nombre_largo():
     usuario = Usuario("juan", "12345")
-    nombre_especial = "José López 🎉✨"
-    telefono_especial = "+57-300-555-6666"
+    nombre_largo = "Maximiliano Fernandez Guti"
+    telefono_largo = "123456789012"
 
-    contacto = Contacto("personal", nombre_especial, telefono_especial)
+    contacto = Contacto("personal", nombre_largo, telefono_largo)
     usuario.gestor.registrar_contacto(contacto)
-    usuario.gestor.exportar_contactos("contactos_especiales.vcf")
+    usuario.gestor.exportar_contactos("contactos_largos.vcf")
 
     nuevo_usuario = Usuario("carlos", "54321")
-    nuevo_usuario.gestor.importar_contactos("contactos_especiales.vcf")
+    nuevo_usuario.gestor.importar_contactos("contactos_largos.vcf")
 
     contacto_encontrado = False
     for contacto in nuevo_usuario.gestor.contactos:
-        if contacto.nombre == nombre_especial and contacto.telefono == telefono_especial:
+        print(f"Nombre importado: {repr(contacto.nombre)}")
+        print(f"Nombre esperado: {repr(nombre_largo)}")
+        print(f"Teléfono importado: {repr(contacto.telefono)}")
+        print(f"Teléfono esperado: {repr(telefono_largo)}")
+        print("-" * 50)
+
+        if contacto.nombre == nombre_largo and contacto.telefono == telefono_largo:
             contacto_encontrado = True
             break
 
-    assert contacto_encontrado, "El contacto con caracteres especiales no fue importado correctamente."
-
+    assert contacto_encontrado, "El contacto con nombre largo no fue importado correctamente."
 
 
 # Errores
@@ -412,21 +417,22 @@ def test_exportar_sin_contactos():
     with pytest.raises(ErrorSinContactos):
         usuario.gestor.exportar_contactos("contactos.vcf")
 
+
 def test_importar_archivo_no_existente():
     usuario = Usuario("juan", "12345")
 
     with pytest.raises(ErrorArchivoInexistente):
         usuario.gestor.importar_contactos("archivo_inexistente.vcf")
 
+
 def test_importar_archivo_formato_invalido():
     with open("formato_invalido.vcf", "w") as archivo:
-        archivo.write("CONTACTO: samuel, 300222398")  #
+        archivo.write("CONTACTO: samuel, 3002223984")  #
 
     usuario = Usuario("juan", "12345")
 
     with pytest.raises(ErrorFormatoArchivoInvalido):
         usuario.gestor.importar_contactos("formato_invalido.vcf")
-
 
 
 

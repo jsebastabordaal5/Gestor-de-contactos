@@ -1,7 +1,6 @@
-from src.model.contacto import Contacto
 
 import os
-from contacto import Contacto
+from src.model.contacto import Contacto
 from src.model.errores import (NombreCortoError , NombreVacioError , NumeroInvalidoError , ContactoNoEncontradoError
                      , DatosInsuficientesError ,ErrorSinContactos, ErrorArchivoInexistente,ErrorFormatoArchivoInvalido,
                      TipoContactoError, NumeroInvalidoError, NombreInvalidoError
@@ -34,11 +33,11 @@ class GestorContactos:
                     self.contactos.append(contacto)
                     return contacto
                 else:
-                    raise TipoContactoError(f"El tipo: {contacto.tipo} es inválido")
+                    raise TipoContactoError()
             else:
-                raise NumeroInvalidoError(f"El número ingresado NO es válido")
+                raise NumeroInvalidoError()
         else:
-            raise NombreInvalidoError
+            raise NombreInvalidoError()
 
 
 
