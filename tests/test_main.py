@@ -5,7 +5,7 @@ from src.model.gestor_usuarios import GestorUsuarios
 
 from src.model.errores import ContactoNoEncontradoError, DatosInsuficientesError,  NombreCortoError, CampoVacioError, \
     NombreVacioError, DatosNoNumericosError, ErrorSinContactos, ErrorArchivoInexistente, ErrorFormatoArchivoInvalido, NombreLargoError, NumeroInvalidoError,  TipoContactoError, \
-    ErrorCriterioInexistente,  ErrorUsuarioYaExistente, ErrorUsuarioInexistente, ErrorTipoInvalidoUsuario, ContraseñaVaciaError, ErrorNombreCaracterInvalido
+    ErrorCriterioInexistente,  ErrorUsuarioYaExistente, ContraseñaIncorrectaError, ErrorUsuarioInexistente, ErrorTipoInvalidoUsuario, ContraseñaVaciaError, ErrorNombreCaracterInvalido
 
 
 
@@ -601,10 +601,15 @@ def test_iniciar_sesion_con_mayusculas_y_minusculas():
     gestor = GestorUsuarios()
     usuario = Usuario("Juan", "ClaveSegura123")
     gestor.registrar_usuario(usuario)
+
     resultado1 = gestor.iniciar_sesion("Juan", "ClaveSegura123")
-    resultado2 = gestor.iniciar_sesion("juan", "claveSegura123")
     assert isinstance(resultado1, Usuario)
+
+    resultado2 = gestor.iniciar_sesion("juan", "ClaveSegura123")
     assert isinstance(resultado2, Usuario)
+
+    with pytest.raises(ContraseñaIncorrectaError):
+        gestor.iniciar_sesion("Juan", "clavesegura123")
 
 
 def test_iniciar_sesion_en_multiples_dispositivos():

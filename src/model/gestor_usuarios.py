@@ -1,5 +1,5 @@
 from src.model.usuario import Usuario
-from src.model.errores import ErrorUsuarioYaExistente, ContraseñaIncorrectaError, NombreInvalidoError, ErrorUsuarioNulo, ErrorTipoInvalidoUsuario
+from src.model.errores import ErrorUsuarioYaExistente, ContraseñaVaciaError, NombreVacioError, ErrorUsuarioInexistente, ContraseñaIncorrectaError, NombreInvalidoError, ErrorUsuarioNulo, ErrorTipoInvalidoUsuario
 
 
 class GestorUsuarios:
@@ -24,15 +24,21 @@ class GestorUsuarios:
         return
 
     def iniciar_sesion(self, nombre: str, contraseña: str) -> Usuario | None:
+        if not nombre:
+            raise NombreVacioError("El nombre de usuario no puede estar vacío.")
+
+        if not contraseña:
+            raise ContraseñaVaciaError("La contraseña no puede estar vacía.")
+
         for usuario in self.usuarios:
-            if usuario.nombre == nombre:
+            if usuario.nombre.lower() == nombre.lower():  # Ignorar mayúsculas/minúsculas
                 if usuario.contraseña == contraseña:
                     print("Sesión iniciada exitosamente")
                     return usuario
                 else:
                     raise ContraseñaIncorrectaError()
-            else:
-                raise NombreInvalidoError()
+
+        raise ErrorUsuarioInexistente()
 
     def cerrar_sesion(self) -> None:
         print("sesión cerrada")

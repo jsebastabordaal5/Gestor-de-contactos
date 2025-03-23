@@ -71,9 +71,7 @@ class ErrorUsuarioYaExistente(Exception):
     def __init__(self, nombre_usuario):
         super().__init__(f"El usuario '{nombre_usuario}' ya está registrado. Elija un nombre diferente.")
 
-class ErrorUsuarioInexistente(Exception):
-    def __init__(self):
-        super().__init__(f"Usuario Inexistente")
+
 
 
 class ErrorLimiteCaracteres(Exception):
@@ -111,9 +109,9 @@ class ErrorNombreCaracterInvalido(Exception):
         super().__init__(f"nombre: {nombre} es inválido")
 
 
-class ErrorUsuarioExistente(Exception):
-    def __init__(self):
-        super().__init__(f"El usuario es existente!")
+class ErrorUsuarioInexistente(Exception):
+    def __init__(self, mensaje = "El usuario es existente"):
+        super().__init__(mensaje)
 
 
 #  pass
@@ -148,7 +146,7 @@ class ErrorUsuarioExistente(Exception):
         super().__init__(f"El usuario ya existe")
 
 class ContraseñaIncorrectaError(Exception):
-    def __init__(self):
-        super().__init__(f"Contraseña Incorrecta")
+    def __init__(self, mensaje="La contraseña ingresada es incorrecta."):
+        super().__init__(mensaje)
 
 
