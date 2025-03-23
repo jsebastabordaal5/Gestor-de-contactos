@@ -20,6 +20,11 @@ class NombreInvalidoError(Exception):
         super().__init__(mensaje)
 
 
+class CampoVacioError(Exception):
+    def __init__(self, mensaje="El campo se encuentra vacío"):
+        super().__init__(mensaje)
+
+
 class NombreVacioError(Exception):
     # Se lanza cuando el campo de nuevo nombre está vacío
     def __init__(self, mensaje="El nombre no puede estar vacío"):

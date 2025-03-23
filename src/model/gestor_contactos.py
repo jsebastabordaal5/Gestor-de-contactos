@@ -3,7 +3,7 @@ import os
 from src.model.contacto import Contacto
 from src.model.errores import (NombreCortoError , NombreVacioError , NumeroInvalidoError , ContactoNoEncontradoError
                      , DatosInsuficientesError ,ErrorSinContactos, ErrorArchivoInexistente,ErrorFormatoArchivoInvalido,
-                     TipoContactoError, NumeroInvalidoError, NombreInvalidoError
+                     TipoContactoError, NumeroInvalidoError, NombreInvalidoError, DatosNoNumericosError, CampoVacioError
                     )
 
 
@@ -27,13 +27,20 @@ class GestorContactos:
         return lista_aux
 
     def registrar_contacto(self, contacto:Contacto):
+        if not contacto.telefono.isdigit():
+            raise DatosNoNumericosError(contacto.telefono)
+
+        if contacto.telefono == "" or contacto.tipo == ""  or contacto.nombre == "":
+            raise CampoVacioError()
+
         if len(contacto.nombre) < 30 and len(contacto.nombre) > 0 :
             if len(contacto.telefono) >= 10 and len(contacto.telefono) <= 12:
                 if contacto.tipo == "profesional" or contacto.tipo == "personal":
                     self.contactos.append(contacto)
                     return contacto
                 else:
-                    raise TipoContactoError()
+                    raise TipoContactoError(contacto.tipo)
+
             else:
                 raise NumeroInvalidoError()
         else:
