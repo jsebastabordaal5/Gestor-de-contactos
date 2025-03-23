@@ -139,6 +139,14 @@ class ErrorLimiteDigitosTelefono(Exception):
         super().__init__(f"El telefono: {telefono} excede los 12 caracteres")
 
 
+class ErrorUsuarioExistente(Exception):
+    def __init__(self):
+        super().__init__(f"El usuario ya existe")
+
+class ErrorCredencialesIncorrectas(Exception):
+    def __init__(self):
+        super().__init__(f"Credenciales incorrectas")
+
 
 
 
