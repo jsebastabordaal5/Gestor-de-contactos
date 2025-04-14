@@ -15,3 +15,5 @@ class MainScreen(Screen):
 
     def registrar_usuario(self):
         self.manager.current = "registrar_usuario_screen"
+
+
