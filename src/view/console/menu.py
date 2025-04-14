@@ -4,7 +4,7 @@ from src.model.contacto import Contacto
 from src.model.gestor_contactos import GestorContactos
 from src.model.gestor_usuarios import GestorUsuarios
 
-class Menu():
+class Menu:
     def __init__(self, sistema: Sistema):
         self.sistema = sistema
 
