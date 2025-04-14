@@ -1,5 +1,5 @@
 from src.model.sistema import Sistema
-from src.model.view.menu import Menu
+from src.view import Menu
 if __name__ == "__main__":
     sistema = Sistema()
     menu = Menu(sistema)
