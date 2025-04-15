@@ -18,3 +18,6 @@ class Contacto:
     def __hash__(self):
         return hash((self.nombre, self.telefono, self.tipo))
 
+    def __str__(self):
+        return f"Nombre: {self.nombre}, Teléfono: {self.telefono}, Tipo: {self.tipo}"
+

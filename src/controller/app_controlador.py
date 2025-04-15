@@ -21,5 +21,8 @@ class AppControlador:
         contacto = Contacto(tipo, nombre, telefono)
         self.usuario_actual.gestor.registrar_contacto(contacto)
 
+    def obtener_contactos(self):
+        return self.usuario_actual.gestor.contactos
+
 
 

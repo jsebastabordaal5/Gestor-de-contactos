@@ -11,7 +11,7 @@ class UsuarioScreen(Screen):
         self.controlador: AppControlador = controlador
 
     def ver_contactos(self):
-        pass
+        self.manager.current = "ver_contactos_screen"
 
     def crear_contacto(self):
         print("Cambiar a crear_contacto_screen")
