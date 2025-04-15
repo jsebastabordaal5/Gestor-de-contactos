@@ -1,6 +1,7 @@
 from kivy.uix.screenmanager import Screen
 from src.controller.app_controlador import AppControlador
 from kivy.lang import Builder
+from kivy.app import App
 
 Builder.load_file("src/view/gui/kv/usuario_screen.kv")
 
@@ -17,8 +18,9 @@ class UsuarioScreen(Screen):
         print("Cambiar a crear_contacto_screen")
         self.manager.current = "crear_contacto_screen"
 
-    def editar_contacto(self):
-        pass
+    def editar_contacto(self, contacto):
+        app = App.get_running_app()
+        app.mostrar_editar_contacto(contacto)
 
     def importar_contactos(self):
         pass

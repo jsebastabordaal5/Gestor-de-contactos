@@ -7,6 +7,7 @@ from src.view.gui.registrar_usuario import RegistrarUsuarioScreen
 from src.view.gui.usuario_screen import UsuarioScreen
 from src.view.gui.crear_contacto_screen import CrearContactoScreen
 from src.view.gui.ver_contactos_screen import VerContactosScreen
+from src.view.gui.editar_contacto_screen import EditarContactoScreen
 
 class ContactosApp(App):
     def __init__(self, controlador: AppControlador, **kwargs):
@@ -21,6 +22,5 @@ class ContactosApp(App):
         screen_manager.add_widget(UsuarioScreen(name="usuario_screen", controlador= self.controlador))
         screen_manager.add_widget(CrearContactoScreen(name="crear_contacto_screen", controlador=self.controlador))
         screen_manager.add_widget(VerContactosScreen(name="ver_contactos_screen", controlador=self.controlador))
-
         return screen_manager
 
