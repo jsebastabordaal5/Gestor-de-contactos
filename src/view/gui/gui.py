@@ -18,7 +18,7 @@ class ContactosApp(App):
         screen_manager.add_widget(IniciarSesionScreen(name="iniciar_sesion_screen", controlador= self.controlador))
         screen_manager.add_widget(RegistrarUsuarioScreen(name="registrar_usuario_screen", controlador= self.controlador))
         screen_manager.add_widget(UsuarioScreen(name="usuario_screen", controlador= self.controlador))
-
+        screen_manager.add_widget(CrearContactoScreen(name="crear_contacto_screen", controlador=self.controlador))
 
         return screen_manager
 

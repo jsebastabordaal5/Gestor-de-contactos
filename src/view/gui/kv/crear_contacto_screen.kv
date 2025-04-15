@@ -10,9 +10,18 @@
             size_hint_y: None
             height: self.texture_size[1]
 
-        TextInput:
+
+        Label:
+            text: "Selecciona el Tipo"
+            size_hint_y: None
+            height: 40
+
+        Spinner:
             id: tipo
-            hint_text: "Tipo"
+            text: "Selecciona tipo"
+            values: ["Profesional", "Personal"]
+            size_hint_y: None
+            height: 40
 
         TextInput:
             id: nombre
@@ -34,7 +43,7 @@
 
             Button:
                 text: "Cancelar"
-                on_release: app.root.current = 'MainScreen'
+                on_release: app.root.current = 'usuario_screen'
 
 
 

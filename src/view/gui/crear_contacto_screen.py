@@ -1,9 +1,10 @@
 from kivy.uix.screenmanager import Screen
 from src.controller.app_controlador import AppControlador
 from kivy.lang import Builder
-from kivy.clock import Clock
-from kivy.uix.label import Label
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
+from kivy.uix.button import Button
+from kivy.uix.label import Label
 
 
 
@@ -15,27 +16,40 @@ class CrearContactoScreen(Screen):
         self.controlador: AppControlador = controlador
 
     def crear_contacto(self):
-        tipo = self.ids.tipo_input.text
-        nombre = self.ids.nombre_input.text
-        telefono = self.telefono_input.text
+        tipo = self.ids.tipo.text.lower()
+        nombre = self.ids.nombre.text
+        telefono = self.ids.telefono.text
 
         try:
             self.controlador.crear_contacto(tipo, nombre, telefono)
             self.mostrar_popup("¡Contacto creado con éxito!")
 
-            # Esperar 2 segundos antes de cambiar de pantalla
-            Clock.schedule_once(lambda dt: self.volver_a_main(), 2)
-
         except Exception as e:
             self.mostrar_popup(f"Error: {str(e)}")
 
-
-
     def mostrar_popup(self, mensaje):
-        popup = Popup(title='Mensaje',
-                      content=Label(text=mensaje),
-                      size_hint=(None, None), size=(400, 200))
+        layout = BoxLayout(orientation='vertical', spacing=10, padding=10)
+
+        label = Label(text=mensaje)
+        btn = Button(text="OK", size_hint_y=None, height=40)
+
+        layout.add_widget(label)
+        layout.add_widget(btn)
+
+        popup = Popup(
+            title='Mensaje',
+            content=layout,
+            size_hint=(0.7, 0.3),
+            auto_dismiss=False
+        )
+
+        btn.bind(on_release=lambda *args: self.cerrar_popup_y_volver(popup))
+
         popup.open()
+
+    def cerrar_popup_y_volver(self, popup):
+        popup.dismiss()
+        self.manager.current = "usuario_screen"
 
     def volver_a_main(self):
         self.manager.current = "MainScreen"

@@ -14,7 +14,8 @@ class UsuarioScreen(Screen):
         pass
 
     def crear_contacto(self):
-        pass
+        print("Cambiar a crear_contacto_screen")
+        self.manager.current = "crear_contacto_screen"
 
     def editar_contacto(self):
         pass
