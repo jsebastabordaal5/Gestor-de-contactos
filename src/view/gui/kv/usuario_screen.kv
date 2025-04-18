@@ -1,4 +1,4 @@
-<UsuarioScreen>
+<UsuarioScreen>:
     BoxLayout:
         orientation: "vertical"
         spacing: 20
@@ -16,35 +16,35 @@
             text: "Ver contactos"
             size_hint_y: None
             height: 40
-            on_press: root.ver_contactos()
+            on_release: root.ver_contactos()
 
         Button:
             text: "Crear contacto"
             size_hint_y: None
             height: 40
-            on_press: root.crear_contacto()
+            on_release: root.crear_contacto()
 
         Button:
             text: "Editar contacto"
             size_hint_y: None
             height: 40
-            on_press: root.editar_contactos()
+            on_release: root.mostrar_lista_edicion()
 
         Button:
             text: "Importar contactos"
             size_hint_y: None
             height: 40
-            on_press: root.ver_contactos()
+            on_release: root.importar_contactos()
 
         Button:
             text: "Exportar contactos"
             size_hint_y: None
             height: 40
-            on_press: root.ver_contactos()
-
+            on_release: root.exportar_contactos()
 
         Button:
             text: "Cerrar sesión"
             size_hint_y: None
             height: 40
-            on_press: root.manager.current = "MainScreen"
+            on_release: root.manager.current = "MainScreen"
+

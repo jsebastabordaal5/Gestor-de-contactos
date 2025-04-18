@@ -1,46 +1,62 @@
 <VerContactosScreen>:
     BoxLayout:
         orientation: "vertical"
+        padding: 10
+        spacing: 10
 
-        BoxLayout:
+        Label:
+            text: "Contactos"
+            font_size: 24
             size_hint_y: None
-            height: dp(50)
+            height: 40
 
-            Spinner:
-                id: filtro_tipo
-                text: "Seleccionar tipo"
-                values: ["profesional", "personal"]
-                size_hint_x: 0.3
+        TextInput:
+            id: filtro_nombre
+            hint_text: "Filtrar por nombre"
+            size_hint_y: None
+            height: 40
+            opacity: 1 if not root.modo_edicion else 0
+            disabled: root.modo_edicion
 
-            TextInput:
-                id: filtro_nombre
-                hint_text: "Filtrar por nombre"
-                size_hint_x: 0.35
+        TextInput:
+            id: filtro_telefono
+            hint_text: "Filtrar por teléfono"
+            size_hint_y: None
+            height: 40
+            opacity: 1 if not root.modo_edicion else 0
+            disabled: root.modo_edicion
 
-            TextInput:
-                id: filtro_telefono
-                hint_text: "Filtrar por teléfono"
-                size_hint_x: 0.35
-
-        RecycleView:
-            id: lista_contactos
-            viewclass: "Label"
-            RecycleBoxLayout:
-                default_size: None, dp(56)
-                default_size_hint: 1, None
-                size_hint_y: None
-                height: self.minimum_height
-                orientation: "vertical"
+        Spinner:
+            id: filtro_tipo
+            text: "Tipo"
+            values: ["", "personal", "profesional"]
+            size_hint_y: None
+            height: 40
+            opacity: 1 if not root.modo_edicion else 0
+            disabled: root.modo_edicion
 
         Button:
             text: "Filtrar"
             size_hint_y: None
-            height: dp(50)
+            height: 40
+            opacity: 1 if not root.modo_edicion else 0
+            disabled: root.modo_edicion
             on_release: root.filtrar_contactos()
+
+        ScrollView:
+            GridLayout:
+                id: lista_contactos
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: 10
+                padding: 10
 
         Button:
             text: "Volver"
             size_hint_y: None
-            height: dp(50)
+            height: 40
             on_release:
-                app.root.current = "usuario_screen"
+                root.modo_edicion = False
+                root.manager.current = "usuario_screen"
+

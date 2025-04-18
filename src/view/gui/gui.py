@@ -14,6 +14,7 @@ class ContactosApp(App):
         super().__init__(**kwargs)
         self.controlador: AppControlador = controlador
 
+
     def build(self):
         screen_manager= ScreenManager()
         screen_manager.add_widget(MainScreen(name="MainScreen", controlador= self.controlador))
@@ -22,5 +23,7 @@ class ContactosApp(App):
         screen_manager.add_widget(UsuarioScreen(name="usuario_screen", controlador= self.controlador))
         screen_manager.add_widget(CrearContactoScreen(name="crear_contacto_screen", controlador=self.controlador))
         screen_manager.add_widget(VerContactosScreen(name="ver_contactos_screen", controlador=self.controlador))
+        screen_manager.add_widget(EditarContactoScreen(name="editar_contacto_screen"))
+
         return screen_manager
 
