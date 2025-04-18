@@ -6,7 +6,6 @@ from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.properties import ObjectProperty
 
-
 class EditarContactoScreen(Screen):
     contacto_original = ObjectProperty(None)
 
@@ -16,7 +15,6 @@ class EditarContactoScreen(Screen):
     def cargar_datos_contacto(self):
         if not self.contacto_original:
             return
-
         self.ids.nombre_input.text = self.contacto_original.nombre
         self.ids.telefono_input.text = self.contacto_original.telefono
         self.ids.correo_input.text = self.contacto_original.correo
@@ -55,3 +53,4 @@ class EditarContactoScreen(Screen):
                       auto_dismiss=False)
         cerrar_btn.bind(on_release=popup.dismiss)
         popup.open()
+

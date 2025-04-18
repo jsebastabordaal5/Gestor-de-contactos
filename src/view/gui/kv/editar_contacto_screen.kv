@@ -6,49 +6,41 @@
 
         Label:
             text: "Editar Contacto"
-            font_size: 24
+            font_size: '24sp'
             size_hint_y: None
-            height: self.texture_size[1]
-
-        Label:
-            text: "Nombre:"
-            size_hint_y: None
-            height: self.texture_size[1]
+            height: self.texture_size[1] + 20
 
         TextInput:
             id: nombre_input
+            hint_text: "Nombre"
             multiline: False
-            size_hint_y: None
-            height: 40
-
-        Label:
-            text: "Teléfono:"
-            size_hint_y: None
-            height: self.texture_size[1]
 
         TextInput:
             id: telefono_input
+            hint_text: "Teléfono"
             multiline: False
-            size_hint_y: None
-            height: 40
 
         TextInput:
             id: correo_input
+            hint_text: "Correo electrónico"
             multiline: False
+
+        Spinner:
+            id: tipo_spinner
+            text: "personal"
+            values: ["personal", "profesional"]
             size_hint_y: None
-            height: 40
+            height: 44
 
         Button:
-            text: "Guardar Cambios"
+            text: "Guardar cambios"
             size_hint_y: None
             height: 50
-            on_release: root.guardar_cambios()
+            on_release: root.guardar_contacto()
 
         Button:
-            text: "Volver"
+            text: "Cancelar"
             size_hint_y: None
             height: 50
-            on_release: app.root.current = "usuario"
-
-
-
+            on_release: root.manager.current = 'usuario_screen'
++

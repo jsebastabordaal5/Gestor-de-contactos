@@ -6,7 +6,7 @@
 
         Label:
             id: bienvenida
-            text: "¡Bienvenido!"
+            text: "Bienvenido!"
             font_size: "24sp"
             halign: "center"
             valign: "middle"
@@ -16,35 +16,30 @@
             text: "Ver contactos"
             size_hint_y: None
             height: 40
-            on_release: root.ver_contactos()
+            on_press: root.ver_contactos()
 
         Button:
             text: "Crear contacto"
             size_hint_y: None
             height: 40
-            on_release: root.crear_contacto()
+            on_press: root.crear_contacto()
 
         Button:
             text: "Editar contacto"
             size_hint_y: None
             height: 40
-            on_release: root.mostrar_lista_edicion()
+            on_press: root.mostrar_lista_edicion()
 
         Button:
             text: "Importar contactos"
             size_hint_y: None
             height: 40
-            on_release: root.importar_contactos()
+            on_press: root.importar_contactos()
 
         Button:
             text: "Exportar contactos"
             size_hint_y: None
             height: 40
-            on_release: root.exportar_contactos()
+            on_press: root.exportar_contactos()
 
-        Button:
-            text: "Cerrar sesión"
-            size_hint_y: None
-            height: 40
-            on_release: root.manager.current = "MainScreen"
 

@@ -1,6 +1,6 @@
 from kivy.uix.screenmanager import Screen
 from kivy.lang import Builder
-from kivy.properties import BooleanProperty
+from kivy.properties import BooleanProperty, ObjectProperty
 from kivy.app import App
 from kivy.uix.button import Button
 from src.controller.app_controlador import AppControlador
@@ -15,7 +15,11 @@ class VerContactosScreen(Screen):
         self.controlador: AppControlador = controlador
 
     def on_enter(self):
-        self.mostrar_contactos()
+        # Mostrar lista según el modo
+        if self.modo_edicion:
+            self.mostrar_contactos()
+        else:
+            self.filtrar_contactos()
 
     def mostrar_contactos(self, contactos=None):
         self.ids.lista_contactos.clear_widgets()
@@ -34,15 +38,14 @@ class VerContactosScreen(Screen):
             height=40
         )
         if self.modo_edicion:
-            btn.bind(on_release=lambda btn: self.ir_a_editar(contacto))
+            btn.bind(on_release=lambda btn, c=contacto: self.abrir_edicion_contacto(c))
         else:
-            btn.bind(on_release=lambda btn: print("Modo vista"))
+            btn.bind(on_release=lambda btn: print("Visualización simple"))
         return btn
 
-    def ir_a_editar(self, contacto):
-        editar = self.manager.get_screen("editar_contacto_screen")
-        editar.contacto_original = contacto
-        editar.cargar_datos_contacto()
+    def abrir_edicion_contacto(self, contacto):
+        pantalla_editar = self.manager.get_screen("editar_contacto_screen")
+        pantalla_editar.contacto_original = contacto
         self.modo_edicion = False
         self.manager.current = "editar_contacto_screen"
 
@@ -59,3 +62,4 @@ class VerContactosScreen(Screen):
                and (telefono in c.telefono.lower() if telefono else True)
         ]
         self.mostrar_contactos(filtrados)
+
