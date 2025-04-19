@@ -5,6 +5,9 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivy.properties import ObjectProperty
+from kivy.lang import Builder
+
+Builder.load_file("src/view/gui/kv/editar_contacto_screen.kv")
 
 class EditarContactoScreen(Screen):
     contacto_original = ObjectProperty(None)
@@ -17,13 +20,11 @@ class EditarContactoScreen(Screen):
             return
         self.ids.nombre_input.text = self.contacto_original.nombre
         self.ids.telefono_input.text = self.contacto_original.telefono
-        self.ids.correo_input.text = self.contacto_original.correo
         self.ids.tipo_spinner.text = self.contacto_original.tipo.lower()
 
     def guardar_contacto(self):
         nombre = self.ids.nombre_input.text.strip()
         telefono = self.ids.telefono_input.text.strip()
-        correo = self.ids.correo_input.text.strip()
         tipo = self.ids.tipo_spinner.text.strip().lower()
 
         if not nombre or not telefono or tipo not in ["personal", "profesional"]:
@@ -34,7 +35,6 @@ class EditarContactoScreen(Screen):
         app.controlador.actualizar_contacto(self.contacto_original, {
             "nombre": nombre,
             "telefono": telefono,
-            "correo": correo,
             "tipo": tipo
         })
 
@@ -53,4 +53,3 @@ class EditarContactoScreen(Screen):
                       auto_dismiss=False)
         cerrar_btn.bind(on_release=popup.dismiss)
         popup.open()
-

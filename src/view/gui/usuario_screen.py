@@ -34,7 +34,7 @@ class UsuarioScreen(Screen):
         self.manager.current = "crear_contacto_screen"
 
     def importar_contactos(self):
-        pass
+        self.manager.current = "importar_contactos_screen"
 
     def exportar_contactos(self):
-        pass
+        self.manager.current = "exportar_contactos_screen"

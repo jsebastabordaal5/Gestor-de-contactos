@@ -62,4 +62,3 @@ class VerContactosScreen(Screen):
                and (telefono in c.telefono.lower() if telefono else True)
         ]
         self.mostrar_contactos(filtrados)
-

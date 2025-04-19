@@ -25,11 +25,15 @@ class AppControlador:
         return self.usuario_actual.gestor.contactos
 
     def actualizar_contacto(self, contacto_original, datos_actualizados):
-        contacto_original.nombre = datos_actualizados.get("nombre", contacto_original.nombre)
-        contacto_original.telefono = datos_actualizados.get("telefono", contacto_original.telefono)
-        contacto_original.tipo = datos_actualizados.get("tipo", contacto_original.tipo)
+        nuevo_nombre = datos_actualizados.get("nombre", None)
+        nuevo_telefono = datos_actualizados.get("telefono", None)
+        nuevo_tipo = datos_actualizados.get("tipo", None)
 
-        self.guardar_datos()
+        self.usuario_actual.gestor.editar_contacto(contacto_original, nuevo_tipo, nuevo_nombre, nuevo_telefono)
 
+    def importar_contactos(self, archivo: str):
+        self.usuario_actual.gestor.importar_contactos(archivo)
 
+    def exportar_contactos(self, nombre_archivo: str):
+        self.usuario_actual.gestor.exportar_contactos(nombre_archivo)
 
