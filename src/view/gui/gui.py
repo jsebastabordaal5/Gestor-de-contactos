@@ -3,7 +3,7 @@ from kivy.uix.screenmanager import ScreenManager
 from src.controller.app_controlador import AppControlador
 from src.view.gui.main_screen import MainScreen
 from src.view.gui.iniciar_sesion_screen import IniciarSesionScreen
-from src.view.gui.registrar_usuario import RegistrarUsuarioScreen
+from src.view.gui.registrar_usuario_screen import RegistrarUsuarioScreen
 from src.view.gui.usuario_screen import UsuarioScreen
 from src.view.gui.crear_contacto_screen import CrearContactoScreen
 from src.view.gui.ver_contactos_screen import VerContactosScreen

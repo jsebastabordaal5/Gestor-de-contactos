@@ -18,6 +18,10 @@ class RegistrarUsuarioScreen(Screen):
         usuario = self.ids.usuario_input.text
         contraseña = self.ids.contrasena_input.text
 
+        if not usuario or not contraseña:
+            self.mostrar_popup("Error: completar los 2 campos")
+            return
+
         try:
             self.controlador.registrar_usuario(usuario, contraseña)
             self.mostrar_popup("¡Usuario registrado con éxito!")
